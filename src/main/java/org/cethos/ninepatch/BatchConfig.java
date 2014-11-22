@@ -5,23 +5,19 @@ public class BatchConfig
     private String inputDirPath;
     private String outputDirPath;
 
+    public BatchConfig(final String inputDirPath, final String outputDirPath)
+    {
+        this.inputDirPath = inputDirPath;
+        this.outputDirPath = outputDirPath;
+    }
+
     public String getInputDirPath()
     {
         return inputDirPath;
     }
 
-    public void setInputDirPath(final String inputDirPath)
-    {
-        this.inputDirPath = inputDirPath;
-    }
-
     public String getOutputDirPath()
     {
         return outputDirPath;
-    }
-
-    public void setOutputDirPath(final String outputDirPath)
-    {
-        this.outputDirPath = outputDirPath;
     }
 }
