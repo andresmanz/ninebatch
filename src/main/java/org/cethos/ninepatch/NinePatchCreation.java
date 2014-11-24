@@ -19,8 +19,8 @@ public class NinePatchCreation
     // TODO passing image dir is quite ugly - class needs refactoring anyway
     // Keep file name out of NinePatchConfig and use a HashMap instead.
     // Then pass the full path to this method.
-    public static BufferedImage createNinePatchFrom(final String basePath,
-                                                    final NinePatchConfig config) throws IOException
+    public static BufferedImage createFrom(final String basePath,
+                                           final NinePatchConfig config) throws IOException
     {
         final String fullPath = basePath + config.getFileName();
         final BufferedImage inputImage = ImageIO.read(new File(fullPath));
