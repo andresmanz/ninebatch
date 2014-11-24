@@ -64,9 +64,9 @@ public class NinePatchCreation
     {
         final PixelRange xPaddingRange = config.xPaddingRange;
         final PixelRange yPaddingRange = config.yPaddingRange;
-        final int width = graphics.getDeviceConfiguration().getBounds().width;
-        final int height = graphics.getDeviceConfiguration().getBounds().height;
-        graphics.drawLine(xPaddingRange.getBegin(), height, xPaddingRange.getEnd(), height);
-        graphics.drawLine(width, yPaddingRange.getBegin(), width, yPaddingRange.getEnd());
+        final int yForX = graphics.getDeviceConfiguration().getBounds().width - 1;
+        final int xForY = graphics.getDeviceConfiguration().getBounds().height - 1;
+        graphics.drawLine(xPaddingRange.getBegin(), yForX, xPaddingRange.getEnd(), yForX);
+        graphics.drawLine(xForY, yPaddingRange.getBegin(), xForY, yPaddingRange.getEnd());
     }
 }
