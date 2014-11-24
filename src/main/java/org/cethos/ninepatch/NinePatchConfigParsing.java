@@ -6,9 +6,9 @@ import com.esotericsoftware.jsonbeans.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonConfigParsing
+public class NinePatchConfigParsing
 {
-    private JsonConfigParsing()
+    private NinePatchConfigParsing()
     {
     }
 

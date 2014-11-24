@@ -2,7 +2,7 @@ package org.cethos.ninepatch.tests;
 
 import org.apache.commons.io.IOUtils;
 import org.cethos.ninepatch.NinePatchConfig;
-import org.cethos.ninepatch.JsonConfigParsing;
+import org.cethos.ninepatch.NinePatchConfigParsing;
 import org.cethos.ninepatch.PixelRange;
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class JsonConfigParsingTest
+public class NinePatchConfigParsingTest
 {
     private static final String RES_PATH_NO_ENTRIES = "/ninepatchconfigs/ninepatches.noentries.json";
     private static final String RES_PATH_TWO_ENTRIES = "/ninepatchconfigs/ninepatches.twoentries.json";
@@ -26,7 +26,7 @@ public class JsonConfigParsingTest
     public void testGetImageConfigsFromJson_jsonWithoutEntries_shouldReturnListWithoutEntries() throws IOException
     {
         final String json = getJsonFromResource(RES_PATH_NO_ENTRIES);
-        final List<NinePatchConfig> ninePatchConfigs = JsonConfigParsing.getImageConfigsFromJson(json);
+        final List<NinePatchConfig> ninePatchConfigs = NinePatchConfigParsing.getImageConfigsFromJson(json);
         assertEquals(0, ninePatchConfigs.size());
     }
 
@@ -34,7 +34,7 @@ public class JsonConfigParsingTest
     public void testGetImageConfigsFromJson_jsonWithTwoEntries_shouldReturnListWithTwoEntries() throws IOException
     {
         final String json = getJsonFromResource(RES_PATH_TWO_ENTRIES);
-        final List<NinePatchConfig> ninePatchConfigs = JsonConfigParsing.getImageConfigsFromJson(json);
+        final List<NinePatchConfig> ninePatchConfigs = NinePatchConfigParsing.getImageConfigsFromJson(json);
 
         final NinePatchConfig config1 = new NinePatchConfig();
         config1.setFileName("testimg1.png");
