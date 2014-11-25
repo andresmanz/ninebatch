@@ -27,7 +27,7 @@ public class NinePatchConfigParsingTest
     {
         final String json = getJsonFromResource(RES_PATH_NO_ENTRIES);
         final Map<String, NinePatchConfig> ninePatchConfigs =
-                NinePatchConfigParsing.getImageConfigsFromJson(json);
+                NinePatchConfigParsing.parse(json);
         assertEquals(0, ninePatchConfigs.size());
     }
 
@@ -36,7 +36,7 @@ public class NinePatchConfigParsingTest
     {
         final String json = getJsonFromResource(RES_PATH_TWO_ENTRIES);
         final Map<String, NinePatchConfig> ninePatchConfigs =
-                NinePatchConfigParsing.getImageConfigsFromJson(json);
+                NinePatchConfigParsing.parse(json);
 
         final NinePatchConfig config1 = new NinePatchConfig();
         config1.xScalingRange.set(16, 48);

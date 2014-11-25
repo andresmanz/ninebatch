@@ -8,50 +8,49 @@ import org.cethos.ninepatch.batch.ConversionBatch;
 import org.cethos.ninepatch.batch.NinePatchConfigParsing;
 import org.cethos.ninepatch.creation.NinePatchConfig;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Map;
 
 public class NinePatchBatchMain
 {
+    private static final String NINEPATCHES_CONFIG_FILE_NAME = "ninepatches.json";
+
     public static void main(final String[] args)
     {
         final BatchArgumentParser argumentParser = new BatchArgumentParser();
 
         try
         {
-            final BatchConfig config = argumentParser.createConfigFromArguments(args);
-            final Map<String, NinePatchConfig> ninePatchConfigs = loadNinePatchConfigsFrom(config.getInputDirPath());
-            final ConversionBatch batch = new ConversionBatch(config);
+            final BatchConfig batchConfig = argumentParser.createConfigFromArguments(args);
+            final Map<String, NinePatchConfig> ninePatchConfigs = loadNinePatchConfigs(batchConfig);
+            final ConversionBatch batch = new ConversionBatch(batchConfig);
             batch.process(ninePatchConfigs);
         }
-        catch(final ParseException e)
+        catch(final ParseException exception)
         {
-            System.err.println(e.getMessage());
             argumentParser.printHelp();
         }
-        catch(final IOException e)
+        catch(final Exception exception)
         {
-            System.err.println(e.getMessage());
+            System.err.println(exception.getMessage());
         }
     }
 
-    private static Map<String, NinePatchConfig> loadNinePatchConfigsFrom(final String inputDirectory) throws IOException
+    private static Map<String, NinePatchConfig> loadNinePatchConfigs(final BatchConfig batchConfig) throws IOException
     {
-        Map<String, NinePatchConfig> ninePatchConfigs = Collections.emptyMap();
-
-        final FileInputStream inputStream = new FileInputStream(inputDirectory + "/ninepatches.json");
-        try
-        {
-            final String json = IOUtils.toString(inputStream);
-            ninePatchConfigs = NinePatchConfigParsing.getImageConfigsFromJson(json);
-        }
-        finally
-        {
-            inputStream.close();
-        }
-
+        final String configJson = loadConfigJsonFrom(batchConfig.getInputDirPath());
+        final Map<String, NinePatchConfig> ninePatchConfigs = NinePatchConfigParsing.parse(configJson);
         return ninePatchConfigs;
+    }
+
+    private static String loadConfigJsonFrom(final String inputDirectory) throws IOException
+    {
+        final File configFile = new File(inputDirectory, NINEPATCHES_CONFIG_FILE_NAME);
+        final FileInputStream inputStream = new FileInputStream(configFile);
+        final String json = IOUtils.toString(inputStream);
+        inputStream.close();
+        return json;
     }
 }

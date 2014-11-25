@@ -15,7 +15,7 @@ public class NinePatchConfigParsing
     {
     }
 
-    public static Map<String, NinePatchConfig> getImageConfigsFromJson(final String jsonConfig)
+    public static Map<String, NinePatchConfig> parse(final String jsonConfig)
     {
         final JsonValue ninePatchesValue = getNinePatchesValueFrom(jsonConfig);
         return getNinePatchConfigsFrom(ninePatchesValue);
