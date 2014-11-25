@@ -2,19 +2,22 @@ package org.cethos.ninepatch;
 
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.IOUtils;
+import org.cethos.ninepatch.batch.BatchArgumentParser;
+import org.cethos.ninepatch.batch.BatchConfig;
+import org.cethos.ninepatch.batch.ConversionBatch;
+import org.cethos.ninepatch.batch.NinePatchConfigParsing;
+import org.cethos.ninepatch.creation.NinePatchConfig;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class NinePatchConvert
+public class NinePatchBatchMain
 {
     public static void main(final String[] args)
     {
-        final ArgumentParser argumentParser = new ArgumentParser();
+        final BatchArgumentParser argumentParser = new BatchArgumentParser();
 
         try
         {

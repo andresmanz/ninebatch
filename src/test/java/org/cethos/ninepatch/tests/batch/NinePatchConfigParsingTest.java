@@ -1,16 +1,15 @@
-package org.cethos.ninepatch.tests;
+package org.cethos.ninepatch.tests.batch;
 
 import org.apache.commons.io.IOUtils;
-import org.cethos.ninepatch.NinePatchConfig;
-import org.cethos.ninepatch.NinePatchConfigParsing;
-import org.cethos.ninepatch.PixelRange;
+import org.cethos.ninepatch.creation.NinePatchConfig;
+import org.cethos.ninepatch.batch.NinePatchConfigParsing;
+import org.cethos.ninepatch.creation.PixelRange;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;

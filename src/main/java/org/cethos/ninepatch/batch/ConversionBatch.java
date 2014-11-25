@@ -1,4 +1,7 @@
-package org.cethos.ninepatch;
+package org.cethos.ninepatch.batch;
+
+import org.cethos.ninepatch.creation.NinePatchConfig;
+import org.cethos.ninepatch.creation.NinePatchCreation;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

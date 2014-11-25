@@ -1,7 +1,10 @@
-package org.cethos.ninepatch;
+package org.cethos.ninepatch.batch;
 
 import com.esotericsoftware.jsonbeans.JsonReader;
 import com.esotericsoftware.jsonbeans.JsonValue;
+
+import org.cethos.ninepatch.creation.NinePatchConfig;
+import org.cethos.ninepatch.creation.PixelRange;
 
 import java.util.HashMap;
 import java.util.Map;

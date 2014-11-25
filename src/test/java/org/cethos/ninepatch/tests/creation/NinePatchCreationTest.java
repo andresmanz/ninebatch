@@ -1,7 +1,7 @@
-package org.cethos.ninepatch.tests;
+package org.cethos.ninepatch.tests.creation;
 
-import org.cethos.ninepatch.NinePatchConfig;
-import org.cethos.ninepatch.NinePatchCreation;
+import org.cethos.ninepatch.creation.NinePatchConfig;
+import org.cethos.ninepatch.creation.NinePatchCreation;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

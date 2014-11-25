@@ -1,4 +1,4 @@
-package org.cethos.ninepatch;
+package org.cethos.ninepatch.batch;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -8,7 +8,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-public class ArgumentParser
+public class BatchArgumentParser
 {
     private static final String CMD_LINE_SYNTAX = "ninepatch-convert";
     private static final String OPT_INPUT_DIR = "i";
@@ -22,7 +22,7 @@ public class ArgumentParser
     private final CommandLineParser parser;
     private final HelpFormatter helpFormatter;
 
-    public ArgumentParser()
+    public BatchArgumentParser()
     {
         this.options = createCommandLineOptions();
         this.parser = new BasicParser();
