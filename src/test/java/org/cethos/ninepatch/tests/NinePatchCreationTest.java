@@ -19,11 +19,10 @@ public class NinePatchCreationTest
         final BufferedImage loadedPatch = loadImageResource("/images/testimage.9.png");
 
         final NinePatchConfig ninePatchConfig = new NinePatchConfig();
-        ninePatchConfig.setFileName("/images/testimage.png");
         ninePatchConfig.xScalingRange.set(8, 57);
         ninePatchConfig.yScalingRange.set(8, 57);
 
-        final BufferedImage resultPatch = NinePatchCreation.createNinePatchFrom(inputImage, ninePatchConfig);
+        final BufferedImage resultPatch = NinePatchCreation.createFrom(inputImage, ninePatchConfig);
         assertImagesEqual(loadedPatch, resultPatch);
     }
 
@@ -35,28 +34,15 @@ public class NinePatchCreationTest
 
     private static void assertImagesEqual(final BufferedImage expected, final BufferedImage actual)
     {
-        /*DataBuffer dbActual = expected.getRaster().getDataBuffer();
-        DataBuffer dbExpected = actual.getRaster().getDataBuffer();
-
-        DataBufferByte actualDBAsDBInt = (DataBufferByte) dbActual ;
-        DataBufferByte expectedDBAsDBInt = (DataBufferByte) dbExpected ;
-
-        for (int bank = 0; bank < actualDBAsDBInt.getNumBanks(); bank++) {
-            byte[] actualData = actualDBAsDBInt.getData(bank);
-            byte[] expectedData = expectedDBAsDBInt.getData(bank);
-            assertArrayEquals(expectedData, actualData);
-        }*/
-
-        int width;
-        int height;
+        final int actualWidth = actual.getWidth();
+        final int actualHeight = actual.getHeight();
         boolean imagesEqual = true;
 
-        if(expected.getWidth() == (width = actual.getWidth()) &&
-                expected.getHeight() == (height = actual.getHeight()))
+        if(expected.getWidth() == actualWidth && expected.getHeight() == actualHeight)
         {
-            for(int x = 0; imagesEqual == true && x < width; ++x)
+            for(int x = 0; imagesEqual == true && x < actualWidth; ++x)
             {
-                for(int y = 0; imagesEqual == true && y < height; ++y)
+                for(int y = 0; imagesEqual == true && y < actualHeight; ++y)
                 {
                     if(expected.getRGB(x, y) != actual.getRGB(x, y))
                     {

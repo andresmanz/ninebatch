@@ -6,7 +6,9 @@ import org.apache.commons.io.IOUtils;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NinePatchConvert
 {
@@ -17,8 +19,9 @@ public class NinePatchConvert
         try
         {
             final BatchConfig config = argumentParser.createConfigFromArguments(args);
-            final List<NinePatchConfig> ninePatchConfigs = loadNinePatchConfigsFrom(config.getInputDirPath());
-            ConversionBatchProcessing.convert(config, ninePatchConfigs);
+            final Map<String, NinePatchConfig> ninePatchConfigs = loadNinePatchConfigsFrom(config.getInputDirPath());
+            final ConversionBatch batch = new ConversionBatch(config);
+            batch.process(ninePatchConfigs);
         }
         catch(final ParseException e)
         {
@@ -31,9 +34,9 @@ public class NinePatchConvert
         }
     }
 
-    private static List<NinePatchConfig> loadNinePatchConfigsFrom(final String inputDirectory) throws IOException
+    private static Map<String, NinePatchConfig> loadNinePatchConfigsFrom(final String inputDirectory) throws IOException
     {
-        List<NinePatchConfig> ninePatchConfigs = Collections.emptyList();
+        Map<String, NinePatchConfig> ninePatchConfigs = Collections.emptyMap();
 
         final FileInputStream inputStream = new FileInputStream(inputDirectory + "/ninepatches.json");
         try

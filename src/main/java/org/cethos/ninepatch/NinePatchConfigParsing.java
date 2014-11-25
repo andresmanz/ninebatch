@@ -3,8 +3,8 @@ package org.cethos.ninepatch;
 import com.esotericsoftware.jsonbeans.JsonReader;
 import com.esotericsoftware.jsonbeans.JsonValue;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NinePatchConfigParsing
 {
@@ -12,7 +12,7 @@ public class NinePatchConfigParsing
     {
     }
 
-    public static List<NinePatchConfig> getImageConfigsFromJson(final String jsonConfig)
+    public static Map<String, NinePatchConfig> getImageConfigsFromJson(final String jsonConfig)
     {
         final JsonValue ninePatchesValue = getNinePatchesValueFrom(jsonConfig);
         return getNinePatchConfigsFrom(ninePatchesValue);
@@ -26,12 +26,13 @@ public class NinePatchConfigParsing
         return ninePatchesValue;
     }
 
-    private static List<NinePatchConfig> getNinePatchConfigsFrom(final JsonValue ninePatchesValue)
+    private static Map<String, NinePatchConfig> getNinePatchConfigsFrom(final JsonValue ninePatchesValue)
     {
-        final List<NinePatchConfig> ninePatchConfigs = new ArrayList<NinePatchConfig>();
+        final Map<String, NinePatchConfig> ninePatchConfigs = new HashMap<String, NinePatchConfig>();
         for(final JsonValue ninePatchValue : ninePatchesValue.iterator())
         {
-            ninePatchConfigs.add(getSingleNinePatchConfigFrom(ninePatchValue));
+            final NinePatchConfig config = getSingleNinePatchConfigFrom(ninePatchValue);
+            ninePatchConfigs.put(ninePatchValue.name(), config);
         }
 
         return ninePatchConfigs;
@@ -40,15 +41,14 @@ public class NinePatchConfigParsing
     private static NinePatchConfig getSingleNinePatchConfigFrom(final JsonValue ninePatchValue)
     {
         final NinePatchConfig ninePatchConfig = new NinePatchConfig();
-        ninePatchConfig.setFileName(ninePatchValue.getString("inputFile"));
-        ninePatchConfig.xScalingRange.set(getPixelRange("xScalingRange", ninePatchValue));
-        ninePatchConfig.yScalingRange.set(getPixelRange("yScalingRange", ninePatchValue));
-        ninePatchConfig.xPaddingRange.set(getPixelRange("xPaddingRange", ninePatchValue));
-        ninePatchConfig.yPaddingRange.set(getPixelRange("yPaddingRange", ninePatchValue));
+        ninePatchConfig.xScalingRange.set(getPixelRangeByKeyFrom("xScalingRange", ninePatchValue));
+        ninePatchConfig.yScalingRange.set(getPixelRangeByKeyFrom("yScalingRange", ninePatchValue));
+        ninePatchConfig.xPaddingRange.set(getPixelRangeByKeyFrom("xPaddingRange", ninePatchValue));
+        ninePatchConfig.yPaddingRange.set(getPixelRangeByKeyFrom("yPaddingRange", ninePatchValue));
         return ninePatchConfig;
     }
 
-    private static PixelRange getPixelRange(final String key, final JsonValue ninePatchValue)
+    private static PixelRange getPixelRangeByKeyFrom(final String key, final JsonValue ninePatchValue)
     {
         final String rangeString = ninePatchValue.getString(key, "0-0");
         return parsePixelRange(rangeString);
@@ -59,6 +59,8 @@ public class NinePatchConfigParsing
         final String[] splitRangeStrings = pixelRangeString.split("-");
         final int begin = Integer.parseInt(splitRangeStrings[0]);
         final int end = Integer.parseInt(splitRangeStrings[1]);
-        return new PixelRange(begin, end);
+        final PixelRange pixelRange = new PixelRange();
+        pixelRange.set(begin, end);
+        return pixelRange;
     }
 }

@@ -4,11 +4,7 @@ public class PixelRange
 {
     private int begin;
     private int end;
-
-    public PixelRange(final int begin, final int end)
-    {
-        set(begin, end);
-    }
+    private boolean isSet;
 
     public int getEnd()
     {
@@ -34,5 +30,11 @@ public class PixelRange
 
         this.begin = begin;
         this.end = end;
+        this.isSet = true;
+    }
+
+    public boolean isSet()
+    {
+        return isSet;
     }
 }
