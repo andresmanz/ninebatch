@@ -3,12 +3,13 @@ package org.cethos.ninepatch.tests.creation;
 import org.cethos.ninepatch.creation.NinePatchConfig;
 import org.cethos.ninepatch.creation.NinePatchCreation;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import static org.junit.Assert.assertTrue;
 
 public class NinePatchCreationTest
 {

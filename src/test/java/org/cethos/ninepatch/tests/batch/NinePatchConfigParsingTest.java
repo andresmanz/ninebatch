@@ -1,8 +1,8 @@
 package org.cethos.ninepatch.tests.batch;
 
 import org.apache.commons.io.IOUtils;
-import org.cethos.ninepatch.creation.NinePatchConfig;
 import org.cethos.ninepatch.batch.NinePatchConfigParsing;
+import org.cethos.ninepatch.creation.NinePatchConfig;
 import org.cethos.ninepatch.creation.PixelRange;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class NinePatchConfigParsingTest
 {
