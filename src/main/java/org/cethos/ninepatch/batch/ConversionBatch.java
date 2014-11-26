@@ -24,24 +24,47 @@ public class ConversionBatch
     {
         for(final Entry<String, NinePatchConfig> entry : ninePatchConfigs.entrySet())
         {
-            try
-            {
-                final String fileName = entry.getKey();
-                final String inputFilePath = batchConfig.getInputPathFor(entry.getKey());
-                final BufferedImage inputImage = ImageIO.read(new File(inputFilePath));
-                final BufferedImage ninePatch = NinePatchCreation.createFrom(inputImage, entry.getValue());
-                final String ninePatchFileName = getOutFileNameFor(fileName);
-                final String outFilePath = batchConfig.getOutputDirPath() + "/" + ninePatchFileName;
-                ImageIO.write(ninePatch, "png", new File(outFilePath));
-            }
-            catch(final IOException e)
-            {
-                System.err.println("Could not process image: " + e.getMessage());
-            }
+            processNinePatchConfigEntry(entry);
         }
     }
 
-    private static String getOutFileNameFor(final String inputFileName)
+    private void processNinePatchConfigEntry(final Entry<String, NinePatchConfig> entry)
+    {
+        final String fileName = entry.getKey();
+        final NinePatchConfig currentConfig = entry.getValue();
+
+        try
+        {
+            convertAndSaveNinePatch(fileName, currentConfig);
+        }
+        catch(final IOException e)
+        {
+            System.err.println("Could not process image: " + e.getMessage());
+        }
+    }
+
+    private void convertAndSaveNinePatch(final String inputFileName, final NinePatchConfig config)
+            throws IOException
+    {
+        final BufferedImage inputImage = ImageIO.read(getInputFileFor(inputFileName));
+        final BufferedImage ninePatch = NinePatchCreation.createFrom(inputImage, config);
+        ImageIO.write(ninePatch, "png", getNinePatchFileFor(inputFileName));
+    }
+
+    private File getInputFileFor(final String inputFileName)
+    {
+        final File inputFile = new File(batchConfig.getInputDirPath(), inputFileName);
+        return inputFile;
+    }
+
+    private File getNinePatchFileFor(final String inputFileName)
+    {
+        final String ninePatchFileName = getNinePatchFileNameFor(inputFileName);
+        final File ninePatchFile = new File(batchConfig.getOutputDirPath(), ninePatchFileName);
+        return ninePatchFile;
+    }
+
+    private static String getNinePatchFileNameFor(final String inputFileName)
     {
         final StringBuilder stringBuilder = new StringBuilder(inputFileName);
         final int lastPeriodIndex = inputFileName.lastIndexOf(".");

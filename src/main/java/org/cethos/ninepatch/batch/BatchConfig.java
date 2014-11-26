@@ -16,11 +16,6 @@ public class BatchConfig
         return inputDirPath;
     }
 
-    public String getInputPathFor(final String fileName)
-    {
-        return inputDirPath + "/" + fileName;
-    }
-
     public String getOutputDirPath()
     {
         return outputDirPath;
