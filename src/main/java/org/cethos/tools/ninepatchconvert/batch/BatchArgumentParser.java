@@ -1,4 +1,4 @@
-package org.cethos.ninepatch.batch;
+package org.cethos.tools.ninepatchconvert.batch;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -10,13 +10,13 @@ import org.apache.commons.cli.ParseException;
 
 public class BatchArgumentParser
 {
-    private static final String CMD_LINE_SYNTAX = "ninepatch-convert";
+    private static final String CMD_LINE_SYNTAX = "ninepatchconvert-convert";
     private static final String OPT_INPUT_DIR = "i";
     private static final String OPT_OUTPUT_DIR = "o";
     private static final String LONG_OPT_INPUT_DIR = "input-directory";
     private static final String LONG_OPT_OUTPUT_DIR = "output-directory";
     private static final String DESC_INPUT_DIR = "input directory containing the images and config file";
-    private static final String DESC_OUTPUT_DIR = "ninepatch output directory";
+    private static final String DESC_OUTPUT_DIR = "ninepatchconvert output directory";
 
     private final Options options;
     private final CommandLineParser parser;

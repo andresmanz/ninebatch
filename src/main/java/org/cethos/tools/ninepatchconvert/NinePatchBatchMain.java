@@ -1,12 +1,12 @@
-package org.cethos.ninepatch;
+package org.cethos.tools.ninepatchconvert;
 
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.IOUtils;
-import org.cethos.ninepatch.batch.BatchArgumentParser;
-import org.cethos.ninepatch.batch.BatchConfig;
-import org.cethos.ninepatch.batch.ConversionBatch;
-import org.cethos.ninepatch.batch.NinePatchConfigParsing;
-import org.cethos.ninepatch.creation.NinePatchConfig;
+import org.cethos.tools.ninepatchconvert.batch.BatchArgumentParser;
+import org.cethos.tools.ninepatchconvert.batch.BatchConfig;
+import org.cethos.tools.ninepatchconvert.batch.ConversionBatch;
+import org.cethos.tools.ninepatchconvert.batch.NinePatchConfigParsing;
+import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 
 import java.io.File;
 import java.io.FileInputStream;

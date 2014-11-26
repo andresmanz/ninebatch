@@ -1,4 +1,4 @@
-package org.cethos.ninepatch.creation;
+package org.cethos.tools.ninepatchconvert.creation;
 
 public class PixelRange
 {

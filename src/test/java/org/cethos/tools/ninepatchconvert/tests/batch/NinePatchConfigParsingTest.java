@@ -1,9 +1,9 @@
-package org.cethos.ninepatch.tests.batch;
+package org.cethos.tools.ninepatchconvert.tests.batch;
 
 import org.apache.commons.io.IOUtils;
-import org.cethos.ninepatch.batch.NinePatchConfigParsing;
-import org.cethos.ninepatch.creation.NinePatchConfig;
-import org.cethos.ninepatch.creation.PixelRange;
+import org.cethos.tools.ninepatchconvert.batch.NinePatchConfigParsing;
+import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
+import org.cethos.tools.ninepatchconvert.creation.PixelRange;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

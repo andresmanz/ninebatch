@@ -1,0 +1,80 @@
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+group = "org.cethos.tools"
+archivesBaseName = "ninepatch-convert"
+version = "1.0.0"
+
+def isDevBuild = true
+
+if(!isDevBuild) {
+    signing {
+        sign configurations.archives
+    }
+} else {
+    task signArchives {
+    }
+}
+
+uploadArchives {
+    repositories {
+        if (isDevBuild) {
+            mavenLocal()
+        } else {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                pom.project {
+                    name 'NinePatch Convert'
+                    packaging 'jar'
+                    // optionally artifactId can be defined here
+                    description 'A small tool that batch converts regular images to nine-patches.'
+                    url 'https://github.com/andresmanz/ninepatch-convert'
+
+                    scm {
+                        connection 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
+                        developerConnection 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
+                        url 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
+                    }
+
+                    licenses {
+                        license {
+                            name 'The Apache License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'andresmanz'
+                            name 'Andres Manz'
+                            email 'manz.andres@gmail.com'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'org.cethos.ninepatch.NinePatchConvert'
+mainClassName = 'org.cethos.tools.ninepatchconvert.NinePatchConvert'
+
+apply from : 'publish.gradle'
 
 repositories {
     mavenCentral()

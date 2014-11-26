@@ -1,4 +1,4 @@
-package org.cethos.ninepatch.creation;
+package org.cethos.tools.ninepatchconvert.creation;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

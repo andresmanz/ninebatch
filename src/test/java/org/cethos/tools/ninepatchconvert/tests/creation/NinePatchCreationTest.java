@@ -1,7 +1,7 @@
-package org.cethos.ninepatch.tests.creation;
+package org.cethos.tools.ninepatchconvert.tests.creation;
 
-import org.cethos.ninepatch.creation.NinePatchConfig;
-import org.cethos.ninepatch.creation.NinePatchCreation;
+import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
+import org.cethos.tools.ninepatchconvert.creation.NinePatchCreation;
 import org.junit.Test;
 
 import java.awt.image.BufferedImage;
