@@ -1,5 +1,7 @@
 ninepatch-convert
 =================
+[![Build Status](https://travis-ci.org/andresmanz/ninepatch-convert.svg?branch=master)](https://travis-ci.org/andresmanz/ninepatch-convert)
+
 Creating ninepatches by hand can be awful, especially if every developer has to create them himself (e.g. if the base images are exported from vector graphics or similar). This tool is optimized for usage in an automatic export system. In my case, that system is a gradle plugin.
 
 Inside the input directory, there has to be a JSON config file called "ninepatches.json" which defines the ninepatch properties of each input image:
