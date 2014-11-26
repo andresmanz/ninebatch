@@ -15,13 +15,9 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
-group = "org.cethos.tools"
-archivesBaseName = "ninepatch-convert"
-version = "1.0.0"
+def isReleaseBuild = hasProperty("release")
 
-def isDevBuild = true
-
-if(!isDevBuild) {
+if(isReleaseBuild) {
     signing {
         sign configurations.archives
     }
@@ -32,9 +28,7 @@ if(!isDevBuild) {
 
 uploadArchives {
     repositories {
-        if (isDevBuild) {
-            mavenLocal()
-        } else {
+        if (isReleaseBuild) {
             mavenDeployer {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
@@ -49,7 +43,7 @@ uploadArchives {
                 pom.project {
                     name 'NinePatch Convert'
                     packaging 'jar'
-                    // optionally artifactId can be defined here
+                    artifactId 'ninepatch-convert'
                     description 'A small tool that batch converts regular images to nine-patches.'
                     url 'https://github.com/andresmanz/ninepatch-convert'
 
@@ -75,6 +69,8 @@ uploadArchives {
                     }
                 }
             }
+        } else {
+            mavenLocal()
         }
     }
 }
