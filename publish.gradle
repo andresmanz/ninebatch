@@ -15,62 +15,52 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
-def isReleaseBuild = hasProperty("release")
-
-if(isReleaseBuild) {
-    signing {
-        sign configurations.archives
-    }
-} else {
-    task signArchives {
-    }
+signing {
+    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
 }
 
 uploadArchives {
     repositories {
-        if (isReleaseBuild) {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'NinePatch Convert'
+                packaging 'jar'
+                artifactId 'ninepatch-convert'
+                description 'A small tool that batch converts regular images to nine-patches.'
+                url 'https://github.com/andresmanz/ninepatch-convert'
+
+                scm {
+                    connection 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
+                    developerConnection 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
+                    url 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
                 }
 
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
                 }
 
-                pom.project {
-                    name 'NinePatch Convert'
-                    packaging 'jar'
-                    artifactId 'ninepatch-convert'
-                    description 'A small tool that batch converts regular images to nine-patches.'
-                    url 'https://github.com/andresmanz/ninepatch-convert'
-
-                    scm {
-                        connection 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
-                        developerConnection 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
-                        url 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
-                    }
-
-                    licenses {
-                        license {
-                            name 'The Apache License, Version 2.0'
-                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id 'andresmanz'
-                            name 'Andres Manz'
-                            email 'manz.andres@gmail.com'
-                        }
+                developers {
+                    developer {
+                        id 'andresmanz'
+                        name 'Andres Manz'
+                        email 'manz.andres@gmail.com'
                     }
                 }
             }
-        } else {
-            mavenLocal()
         }
     }
 }

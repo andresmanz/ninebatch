@@ -1,17 +1,26 @@
+apply plugin: 'groovy'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'application'
 
 mainClassName = 'org.cethos.tools.ninepatchconvert.NinePatchConvert'
 
-apply from : 'publish.gradle'
-
 allprojects {
-    version = '1.0.0'
+    version = '1.0.1-SNAPSHOT'
+    ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
     group = 'org.cethos.tools'
-}
 
-repositories {
-    mavenCentral()
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
 }
 
 dependencies {
@@ -20,3 +29,5 @@ dependencies {
     compile group: 'com.esotericsoftware', name: 'jsonbeans', version: '0.7'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
+
+apply from : 'publish.gradle'
