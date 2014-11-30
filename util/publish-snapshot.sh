@@ -18,3 +18,4 @@ if [ "$TRAVIS_REPO_SLUG" == "andresmanz/ninepatch-convert" ] && [ "$TRAVIS_PULL_
         return 1
     fi
 fi
+
