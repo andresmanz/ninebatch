@@ -5,10 +5,15 @@ buildscript {
         mavenCentral()
         mavenLocal()
     }
+    dependencies {
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
+    }
 }
 
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
 
 mainClassName = 'org.cethos.tools.ninepatchconvert.NinePatchConvert'
 
@@ -33,4 +38,13 @@ dependencies {
 task getVersion << {
     println version
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
 apply from : 'publish.gradle'
+
