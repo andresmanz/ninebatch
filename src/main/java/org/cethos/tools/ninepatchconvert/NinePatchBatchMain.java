@@ -6,6 +6,7 @@ import org.cethos.tools.ninepatchconvert.batch.BatchArgumentParser;
 import org.cethos.tools.ninepatchconvert.batch.BatchConfig;
 import org.cethos.tools.ninepatchconvert.batch.ConversionBatch;
 import org.cethos.tools.ninepatchconvert.batch.NinePatchConfigParsing;
+import org.cethos.tools.ninepatchconvert.creation.FileImageInputOutput;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 
 import java.io.File;
@@ -25,7 +26,7 @@ public class NinePatchBatchMain
         {
             final BatchConfig batchConfig = argumentParser.createConfigFromArguments(args);
             final Map<String, NinePatchConfig> ninePatchConfigs = loadNinePatchConfigs(batchConfig);
-            final ConversionBatch batch = new ConversionBatch(batchConfig);
+            final ConversionBatch batch = new ConversionBatch(batchConfig, new FileImageInputOutput());
             batch.process(ninePatchConfigs);
         }
         catch(final ParseException exception)

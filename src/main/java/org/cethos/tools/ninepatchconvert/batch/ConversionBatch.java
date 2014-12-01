@@ -1,24 +1,27 @@
 package org.cethos.tools.ninepatchconvert.batch;
 
 import org.cethos.tools.ninepatchconvert.NinePatchUtil;
+import org.cethos.tools.ninepatchconvert.creation.ImageInputOutput;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchCreation;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.imageio.ImageIO;
 
 public class ConversionBatch
 {
     private final BatchConfig batchConfig;
+    private final ImageInputOutput imageInputOutput;
 
-    public ConversionBatch(final BatchConfig batchConfig)
+    public ConversionBatch(final BatchConfig batchConfig, final ImageInputOutput imageInputOutput)
     {
         this.batchConfig = batchConfig;
+        this.imageInputOutput = imageInputOutput;
     }
 
     public void process(final Map<String, NinePatchConfig> ninePatchConfigs)
@@ -40,28 +43,27 @@ public class ConversionBatch
         }
         catch(final IOException e)
         {
-            System.err.println("Could not process image: " + e.getMessage());
+            System.err.println("Could not process image: " + fileName);
+            System.err.println(e.getMessage());
         }
     }
 
     private void convertAndSaveNinePatch(final String imageFileName, final NinePatchConfig config)
             throws IOException
     {
-        final BufferedImage inputImage = ImageIO.read(getInputFileFor(imageFileName));
+        final BufferedImage inputImage = imageInputOutput.read(getInputFilePathFor(imageFileName));
         final BufferedImage ninePatch = NinePatchCreation.createFrom(inputImage, config);
-        ImageIO.write(ninePatch, "png", getNinePatchFileFor(imageFileName));
+        imageInputOutput.write(ninePatch, getNinePatchFilePathFor(imageFileName));
     }
 
-    private File getInputFileFor(final String inputFileName)
+    private Path getInputFilePathFor(final String inputFileName)
     {
-        final File inputFile = new File(batchConfig.getInputDirPath(), inputFileName);
-        return inputFile;
+        return Paths.get(batchConfig.getInputDirPath(), inputFileName);
     }
 
-    private File getNinePatchFileFor(final String imageFileName)
+    private Path getNinePatchFilePathFor(final String imageFileName)
     {
         final String ninePatchFileName = NinePatchUtil.getNinePatchFileNameFor(imageFileName);
-        final File ninePatchFile = new File(batchConfig.getOutputDirPath(), ninePatchFileName);
-        return ninePatchFile;
+        return Paths.get(batchConfig.getOutputDirPath(), ninePatchFileName);
     }
 }
