@@ -4,9 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.cethos.tools.ninepatchconvert.batch.NinePatchConfigParsing;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 import org.cethos.tools.ninepatchconvert.creation.PixelRange;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,9 +16,6 @@ public class NinePatchConfigParsingTest
 {
     private static final String RES_PATH_NO_ENTRIES = "/ninepatchconfigs/ninepatches.noentries.json";
     private static final String RES_PATH_TWO_ENTRIES = "/ninepatchconfigs/ninepatches.twoentries.json";
-
-    @Rule
-    public final ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testGetImageConfigsFromJson_jsonWithoutEntries_shouldReturnListWithoutEntries() throws IOException
