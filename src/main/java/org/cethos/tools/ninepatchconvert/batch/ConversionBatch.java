@@ -1,5 +1,6 @@
 package org.cethos.tools.ninepatchconvert.batch;
 
+import org.cethos.tools.ninepatchconvert.NinePatchUtil;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchCreation;
 
@@ -43,12 +44,12 @@ public class ConversionBatch
         }
     }
 
-    private void convertAndSaveNinePatch(final String inputFileName, final NinePatchConfig config)
+    private void convertAndSaveNinePatch(final String imageFileName, final NinePatchConfig config)
             throws IOException
     {
-        final BufferedImage inputImage = ImageIO.read(getInputFileFor(inputFileName));
+        final BufferedImage inputImage = ImageIO.read(getInputFileFor(imageFileName));
         final BufferedImage ninePatch = NinePatchCreation.createFrom(inputImage, config);
-        ImageIO.write(ninePatch, "png", getNinePatchFileFor(inputFileName));
+        ImageIO.write(ninePatch, "png", getNinePatchFileFor(imageFileName));
     }
 
     private File getInputFileFor(final String inputFileName)
@@ -57,18 +58,10 @@ public class ConversionBatch
         return inputFile;
     }
 
-    private File getNinePatchFileFor(final String inputFileName)
+    private File getNinePatchFileFor(final String imageFileName)
     {
-        final String ninePatchFileName = getNinePatchFileNameFor(inputFileName);
+        final String ninePatchFileName = NinePatchUtil.getNinePatchFileNameFor(imageFileName);
         final File ninePatchFile = new File(batchConfig.getOutputDirPath(), ninePatchFileName);
         return ninePatchFile;
-    }
-
-    private static String getNinePatchFileNameFor(final String inputFileName)
-    {
-        final StringBuilder stringBuilder = new StringBuilder(inputFileName);
-        final int lastPeriodIndex = inputFileName.lastIndexOf(".");
-        stringBuilder.insert(lastPeriodIndex, ".9");
-        return stringBuilder.toString();
     }
 }
