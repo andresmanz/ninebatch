@@ -3,9 +3,10 @@ package org.cethos.tools.ninepatchconvert.tests.batch;
 import org.cethos.tools.ninepatchconvert.batch.ConversionBatch;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import java.util.HashMap;
+
+import static org.junit.Assert.assertEquals;
 
 public class ConversionBatchTest
 {

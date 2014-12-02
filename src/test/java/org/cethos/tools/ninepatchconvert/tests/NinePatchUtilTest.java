@@ -2,7 +2,8 @@ package org.cethos.tools.ninepatchconvert.tests;
 
 import org.cethos.tools.ninepatchconvert.NinePatchUtil;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class NinePatchUtilTest
 {

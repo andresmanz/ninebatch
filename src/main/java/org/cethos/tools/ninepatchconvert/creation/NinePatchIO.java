@@ -3,7 +3,6 @@ package org.cethos.tools.ninepatchconvert.creation;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
-import java.nio.file.Path;
 
 public interface NinePatchIO
 {
