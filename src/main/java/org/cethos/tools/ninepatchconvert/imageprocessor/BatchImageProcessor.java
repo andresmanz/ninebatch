@@ -2,7 +2,6 @@ package org.cethos.tools.ninepatchconvert.imageprocessor;
 
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.IOUtils;
-import org.cethos.tools.ninepatchconvert.batch.BatchArgumentParser;
 import org.cethos.tools.ninepatchconvert.batch.BatchConfig;
 import org.cethos.tools.ninepatchconvert.batch.ConversionBatch;
 import org.cethos.tools.ninepatchconvert.batch.NinePatchConfigParsing;
@@ -20,27 +19,25 @@ public class BatchImageProcessor implements ImageProcessor
     private static final String NINEPATCHES_CONFIG_FILE_NAME = "ninepatches.json";
 
     private final BatchConfig batchConfig;
+    private final NinePatchIO ninePatchIO;
 
-    public BatchImageProcessor(final String[] args) throws ParseException
+    public BatchImageProcessor(final BatchConfig batchConfig) throws ParseException
     {
-        final BatchArgumentParser argumentParser = new BatchArgumentParser();
+        this.batchConfig = batchConfig;
+        this.ninePatchIO = createNinePatchInputOutputFor(batchConfig);
+    }
 
-        try
-        {
-            this.batchConfig = argumentParser.createConfigFromArguments(args);
-        }
-        catch(final ParseException exception)
-        {
-            argumentParser.printHelp();
-            throw exception;
-        }
+    private static NinePatchIO createNinePatchInputOutputFor(final BatchConfig batchConfig)
+    {
+        final String inputDirPath = batchConfig.getInputDirPath();
+        final String outputDirPath = batchConfig.getOutputDirPath();
+        return new FileNinePatchIO(inputDirPath, outputDirPath);
     }
 
     @Override
     public void process() throws IOException
     {
         final Map<String, NinePatchConfig> ninePatchConfigs = loadNinePatchConfigs(batchConfig);
-        final NinePatchIO ninePatchIO = createNinePatchInputOutputFor(batchConfig);
         final ConversionBatch conversionBatch = new ConversionBatch(ninePatchIO);
         conversionBatch.process(ninePatchConfigs);
     }
@@ -48,8 +45,8 @@ public class BatchImageProcessor implements ImageProcessor
     private static Map<String, NinePatchConfig> loadNinePatchConfigs(final BatchConfig batchConfig) throws IOException
     {
         final String configJson = loadConfigJsonFrom(batchConfig.getInputDirPath());
-        final Map<String, NinePatchConfig> ninePatchConfigs = NinePatchConfigParsing.parse(configJson);
-        return ninePatchConfigs;
+        final Map<String, NinePatchConfig> configs = NinePatchConfigParsing.parse(configJson);
+        return configs;
     }
 
     private static String loadConfigJsonFrom(final String inputDirectory) throws IOException
@@ -59,12 +56,5 @@ public class BatchImageProcessor implements ImageProcessor
         final String json = IOUtils.toString(inputStream);
         inputStream.close();
         return json;
-    }
-
-    private static NinePatchIO createNinePatchInputOutputFor(final BatchConfig batchConfig)
-    {
-        final String inputDirPath = batchConfig.getInputDirPath();
-        final String outputDirPath = batchConfig.getOutputDirPath();
-        return new FileNinePatchIO(inputDirPath, outputDirPath);
     }
 }
