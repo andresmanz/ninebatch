@@ -18,7 +18,7 @@ apply plugin: 'com.github.kt3k.coveralls'
 mainClassName = 'org.cethos.tools.ninepatchconvert.NinePatchConvert'
 
 allprojects {
-    version = '1.0.1'
+    version = '1.1-SNAPSHOT'
     group = 'org.cethos.tools'
 
     ext {
