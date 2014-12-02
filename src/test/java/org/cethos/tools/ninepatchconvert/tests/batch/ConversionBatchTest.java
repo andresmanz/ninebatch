@@ -14,8 +14,9 @@ public class ConversionBatchTest
     public void testProcess_withZeroImages()
     {
         final MockNinePatchIO imageInputOutput = new MockNinePatchIO();
-        final ConversionBatch conversionBatch = new ConversionBatch(imageInputOutput);
-        conversionBatch.process(new HashMap<String, NinePatchConfig>());
+        final ConversionBatch conversionBatch = new ConversionBatch();
+        conversionBatch.add(new HashMap<String, NinePatchConfig>());
+        conversionBatch.process(imageInputOutput);
         assertEquals(0, imageInputOutput.getTotalReadCount());
         assertEquals(0, imageInputOutput.getTotalWriteCount());
     }
@@ -24,12 +25,11 @@ public class ConversionBatchTest
     public void testProcess_withTwoImages()
     {
         final MockNinePatchIO imageInputOutput = new MockNinePatchIO();
-        final ConversionBatch conversionBatch = new ConversionBatch(imageInputOutput);
+        final ConversionBatch conversionBatch = new ConversionBatch();
 
-        final HashMap<String, NinePatchConfig> configs = new HashMap<String, NinePatchConfig>();
-        configs.put("testfile1.png", new NinePatchConfig());
-        configs.put("testfile2.png", new NinePatchConfig());
-        conversionBatch.process(configs);
+        conversionBatch.add("testfile1.png", new NinePatchConfig());
+        conversionBatch.add("testfile2.png", new NinePatchConfig());
+        conversionBatch.process(imageInputOutput);
 
         assertEquals(2, imageInputOutput.getTotalReadCount());
         assertEquals(2, imageInputOutput.getTotalWriteCount());

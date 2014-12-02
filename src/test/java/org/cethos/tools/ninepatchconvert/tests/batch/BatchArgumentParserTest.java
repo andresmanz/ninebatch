@@ -1,7 +1,7 @@
 package org.cethos.tools.ninepatchconvert.tests.batch;
 
 import org.apache.commons.cli.ParseException;
-import org.cethos.tools.ninepatchconvert.batch.BatchArgumentParser;
+import org.cethos.tools.ninepatchconvert.conversion.BatchArgumentParser;
 import org.cethos.tools.ninepatchconvert.batch.BatchConfig;
 import org.junit.Before;
 import org.junit.Rule;

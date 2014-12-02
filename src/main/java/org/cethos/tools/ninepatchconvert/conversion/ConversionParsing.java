@@ -1,4 +1,4 @@
-package org.cethos.tools.ninepatchconvert.batch;
+package org.cethos.tools.ninepatchconvert.conversion;
 
 import com.esotericsoftware.jsonbeans.JsonReader;
 import com.esotericsoftware.jsonbeans.JsonValue;
@@ -10,9 +10,9 @@ import org.cethos.tools.ninepatchconvert.creation.PixelRange;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NinePatchConfigParsing
+public class ConversionParsing
 {
-    private NinePatchConfigParsing()
+    private ConversionParsing()
     {
     }
 

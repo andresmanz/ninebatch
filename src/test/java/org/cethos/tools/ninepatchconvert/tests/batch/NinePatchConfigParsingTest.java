@@ -1,7 +1,7 @@
 package org.cethos.tools.ninepatchconvert.tests.batch;
 
 import org.apache.commons.io.IOUtils;
-import org.cethos.tools.ninepatchconvert.batch.NinePatchConfigParsing;
+import org.cethos.tools.ninepatchconvert.conversion.ConversionParsing;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 import org.cethos.tools.ninepatchconvert.creation.PixelRange;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class NinePatchConfigParsingTest
     {
         final String json = getJsonFromResource(RES_PATH_NO_ENTRIES);
         final Map<String, NinePatchConfig> ninePatchConfigs =
-                NinePatchConfigParsing.parse(json);
+                ConversionParsing.parse(json);
         assertEquals(0, ninePatchConfigs.size());
     }
 
@@ -31,7 +31,7 @@ public class NinePatchConfigParsingTest
     {
         final String json = getJsonFromResource(RES_PATH_TWO_ENTRIES);
         final Map<String, NinePatchConfig> ninePatchConfigs =
-                NinePatchConfigParsing.parse(json);
+                ConversionParsing.parse(json);
 
         final NinePatchConfig config1 = new NinePatchConfig();
         config1.xScalingRange.set(16, 48);

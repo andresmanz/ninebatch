@@ -11,35 +11,26 @@ import javax.imageio.ImageIO;
 
 public class FileNinePatchIO implements NinePatchIO
 {
-    private final String baseInputDirectory;
-    private final String baseOutputDirectory;
-
-    public FileNinePatchIO(final String baseInputDirectory, final String baseOutputDirectory)
-    {
-        this.baseInputDirectory = baseInputDirectory;
-        this.baseOutputDirectory = baseOutputDirectory;
-    }
-
     @Override
     public void writeNinePatchFor(final RenderedImage image, final String originalFileName) throws IOException
     {
         ImageIO.write(image, "png", getNinePatchFileFor(originalFileName));
     }
 
-    private File getNinePatchFileFor(final String imageFileName)
+    private File getNinePatchFileFor(final String imageFilePath)
     {
-        final String ninePatchFileName = NinePatchUtil.getNinePatchFileNameFor(imageFileName);
-        return new File(baseOutputDirectory, ninePatchFileName);
+        final String ninePatchFileName = NinePatchUtil.getNinePatchFileNameFor(imageFilePath);
+        return new File(ninePatchFileName);
     }
 
     @Override
-    public BufferedImage read(final String fileName) throws IOException
+    public BufferedImage read(final String imageFilePath) throws IOException
     {
-        return ImageIO.read(getInputFileFor(fileName));
+        return ImageIO.read(getInputFileFor(imageFilePath));
     }
 
     private File getInputFileFor(final String inputFileName)
     {
-        return new File(baseInputDirectory, inputFileName);
+        return new File(inputFileName);
     }
 }

@@ -1,7 +1,9 @@
 package org.cethos.tools.ninepatchconvert;
 
-import org.cethos.tools.ninepatchconvert.imageprocessor.ImageProcessor;
-import org.cethos.tools.ninepatchconvert.imageprocessor.ImageProcessorFactory;
+import org.cethos.tools.ninepatchconvert.batch.ConversionBatch;
+import org.cethos.tools.ninepatchconvert.conversion.provider.ConversionProvider;
+import org.cethos.tools.ninepatchconvert.creation.FileNinePatchIO;
+import org.cethos.tools.ninepatchconvert.conversion.provider.ConversionProviderFactory;
 
 public class NinePatchBatchMain
 {
@@ -9,9 +11,11 @@ public class NinePatchBatchMain
     {
         try
         {
-            final ImageProcessorFactory processorFactory = new ImageProcessorFactory();
-            final ImageProcessor imageProcessor = processorFactory.createFrom(args);
-            imageProcessor.process();
+            final ConversionProviderFactory providerFactory = new ConversionProviderFactory();
+            final ConversionProvider provider = providerFactory.createFrom(args);
+            final ConversionBatch conversionBatch = new ConversionBatch();
+            conversionBatch.add(provider.createConfigs());
+            conversionBatch.process(new FileNinePatchIO());
         }
         catch(final Exception e)
         {

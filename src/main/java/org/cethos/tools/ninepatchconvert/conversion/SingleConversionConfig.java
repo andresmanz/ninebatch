@@ -1,11 +1,10 @@
-package org.cethos.tools.ninepatchconvert.imageprocessor;
+package org.cethos.tools.ninepatchconvert.conversion;
 
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 
 public class SingleConversionConfig
 {
     private String inputFilePath;
-    private String outputFilePath;
     private NinePatchConfig ninePatchConfig;
 
     public String getInputFilePath()
@@ -16,16 +15,6 @@ public class SingleConversionConfig
     public void setInputFilePath(final String inputFilePath)
     {
         this.inputFilePath = inputFilePath;
-    }
-
-    public String getOutputFilePath()
-    {
-        return outputFilePath;
-    }
-
-    public void setOutputFilePath(final String outputFilePath)
-    {
-        this.outputFilePath = outputFilePath;
     }
 
     public NinePatchConfig getNinePatchConfig()
