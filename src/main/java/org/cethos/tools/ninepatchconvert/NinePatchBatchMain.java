@@ -6,8 +6,9 @@ import org.cethos.tools.ninepatchconvert.batch.BatchArgumentParser;
 import org.cethos.tools.ninepatchconvert.batch.BatchConfig;
 import org.cethos.tools.ninepatchconvert.batch.ConversionBatch;
 import org.cethos.tools.ninepatchconvert.batch.NinePatchConfigParsing;
-import org.cethos.tools.ninepatchconvert.creation.FileImageInputOutput;
+import org.cethos.tools.ninepatchconvert.creation.FileNinePatchIO;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
+import org.cethos.tools.ninepatchconvert.creation.NinePatchIO;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +27,8 @@ public class NinePatchBatchMain
         {
             final BatchConfig batchConfig = argumentParser.createConfigFromArguments(args);
             final Map<String, NinePatchConfig> ninePatchConfigs = loadNinePatchConfigs(batchConfig);
-            final ConversionBatch batch = new ConversionBatch(batchConfig, new FileImageInputOutput());
+            final NinePatchIO ninePatchIO = createNinePatchInputOutputFor(batchConfig);
+            final ConversionBatch batch = new ConversionBatch(ninePatchIO);
             batch.process(ninePatchConfigs);
         }
         catch(final ParseException exception)
@@ -53,5 +55,12 @@ public class NinePatchBatchMain
         final String json = IOUtils.toString(inputStream);
         inputStream.close();
         return json;
+    }
+
+    private static NinePatchIO createNinePatchInputOutputFor(final BatchConfig batchConfig)
+    {
+        final String inputDirPath = batchConfig.getInputDirPath();
+        final String outputDirPath = batchConfig.getOutputDirPath();
+        return new FileNinePatchIO(inputDirPath, outputDirPath);
     }
 }
