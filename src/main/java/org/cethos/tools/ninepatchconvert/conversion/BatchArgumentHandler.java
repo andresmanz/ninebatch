@@ -1,17 +1,12 @@
 package org.cethos.tools.ninepatchconvert.conversion;
 
-import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 import org.cethos.tools.ninepatchconvert.batch.BatchConfig;
 
-public class BatchArgumentParser
+public class BatchArgumentHandler
 {
-    private static final String CMD_LINE_SYNTAX = "ninepatchconvert-convert";
     private static final String OPT_INPUT_DIR = "i";
     private static final String OPT_OUTPUT_DIR = "o";
     private static final String LONG_OPT_INPUT_DIR = "input-directory";
@@ -20,14 +15,15 @@ public class BatchArgumentParser
     private static final String DESC_OUTPUT_DIR = "ninepatchconvert output directory";
 
     private final Options options;
-    private final CommandLineParser parser;
-    private final HelpFormatter helpFormatter;
 
-    public BatchArgumentParser()
+    public BatchArgumentHandler()
     {
         this.options = createCommandLineOptions();
-        this.parser = new BasicParser();
-        this.helpFormatter = new HelpFormatter();
+    }
+
+    public Options getOptions()
+    {
+        return options;
     }
 
     private static Options createCommandLineOptions()
@@ -35,10 +31,10 @@ public class BatchArgumentParser
         final Option inputDirOption = createInputDirectoryOption();
         final Option outputDirOption = createOutputDirectoryOption();
 
-        Options options = new Options();
-        options.addOption(inputDirOption);
-        options.addOption(outputDirOption);
-        return  options;
+        final Options optionGroup = new Options();
+        optionGroup.addOption(inputDirOption);
+        optionGroup.addOption(outputDirOption);
+        return optionGroup;
     }
 
     private static Option createInputDirectoryOption()
@@ -64,17 +60,11 @@ public class BatchArgumentParser
         return option;
     }
 
-    public BatchConfig createConfigFromArguments(final String[] arguments) throws ParseException
+    public BatchConfig createConfigFrom(final CommandLine commandLine)
     {
-        final CommandLine commandLine = parser.parse(options, arguments);
         final String inputDirPath = commandLine.getOptionValue(OPT_INPUT_DIR);
         final String outputDirPath = commandLine.getOptionValue(OPT_OUTPUT_DIR, inputDirPath);
         final BatchConfig batchConfig = new BatchConfig(inputDirPath, outputDirPath);
         return batchConfig;
-    }
-
-    public void printHelp()
-    {
-        helpFormatter.printHelp(CMD_LINE_SYNTAX, options);
     }
 }

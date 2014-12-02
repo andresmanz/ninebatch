@@ -1,7 +1,11 @@
 package org.cethos.tools.ninepatchconvert.tests.batch;
 
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.cethos.tools.ninepatchconvert.conversion.BatchArgumentParser;
+import org.cethos.tools.ninepatchconvert.conversion.BatchArgumentHandler;
 import org.cethos.tools.ninepatchconvert.batch.BatchConfig;
 import org.junit.Before;
 import org.junit.Rule;
@@ -10,9 +14,9 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
-public class BatchArgumentParserTest
+public class BatchArgumentHandlerTest
 {
-    private BatchArgumentParser argumentParser;
+    private BatchArgumentHandler argumentHandler;
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
@@ -20,7 +24,7 @@ public class BatchArgumentParserTest
     @Before
     public void beforeTest()
     {
-        this.argumentParser = new BatchArgumentParser();
+        this.argumentHandler = new BatchArgumentHandler();
     }
 
     @Test
@@ -29,7 +33,8 @@ public class BatchArgumentParserTest
         final String[] arguments = new String[0];
         thrown.expect(ParseException.class);
         thrown.expectMessage("Missing required option");
-        argumentParser.createConfigFromArguments(arguments);
+        final CommandLine commandLine = createCommandLine(arguments);
+        argumentHandler.createConfigFrom(commandLine);
     }
 
     @Test
@@ -40,9 +45,17 @@ public class BatchArgumentParserTest
         arguments[1] = "testinputdirectory";
         arguments[2] = "-o";
         arguments[3] = "testoutputdirectory";
-        
-        final BatchConfig config = argumentParser.createConfigFromArguments(arguments);
+
+        final CommandLine commandLine = createCommandLine(arguments);
+        final BatchConfig config = argumentHandler.createConfigFrom(commandLine);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testoutputdirectory");
+    }
+
+    private CommandLine createCommandLine(final String[] args) throws ParseException
+    {
+        final CommandLineParser parser = new BasicParser();
+        final Options options = new Options();
+        return parser.parse(options, args);
     }
 }

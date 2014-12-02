@@ -1,20 +1,14 @@
 package org.cethos.tools.ninepatchconvert.conversion;
 
-import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.OptionGroup;
 import org.cethos.tools.ninepatchconvert.NinePatchOptionUtil;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 import org.cethos.tools.ninepatchconvert.creation.PixelRange;
 
 public class SingleArgumentParser
 {
-    private static final String CMD_LINE_SYNTAX = "ninepatchconvert-convert";
-
     private static final String OPT_INPUT_FILE = "i";
     private static final String OPT_X_SCALING = "xs";
     private static final String OPT_Y_SCALING = "ys";
@@ -29,29 +23,25 @@ public class SingleArgumentParser
     private static final String DESC_X_PADDING = "x padding range, eg '5-10'";
     private static final String DESC_Y_PADDING = "y padding range, eg '5-10'";
 
-    private final Options options;
-    private final CommandLineParser parser;
-    private final HelpFormatter helpFormatter;
+    private final OptionGroup optionGroup;
 
     public SingleArgumentParser()
     {
-        this.options = createCommandLineOptions();
-        this.parser = new BasicParser();
-        this.helpFormatter = new HelpFormatter();
+        this.optionGroup = createCommandLineOptionGroup();
     }
 
-    private static Options createCommandLineOptions()
+    private static OptionGroup createCommandLineOptionGroup()
     {
         final Option inputFileOption = createInputFileOption();
 
-        Options options = new Options();
-        options.addOption(inputFileOption);
-        options.addOption(new Option("s", "process single image"));
-        options.addOption(createPixelRangeConfigOption(OPT_X_SCALING, DESC_X_SCALING));
-        options.addOption(createPixelRangeConfigOption(OPT_Y_SCALING, DESC_Y_SCALING));
-        options.addOption(createPixelRangeConfigOption(OPT_X_PADDING, DESC_X_PADDING));
-        options.addOption(createPixelRangeConfigOption(OPT_Y_PADDING, DESC_Y_PADDING));
-        return  options;
+        OptionGroup optionGroup = new OptionGroup();
+        optionGroup.addOption(inputFileOption);
+        optionGroup.addOption(new Option("s", "process single image"));
+        optionGroup.addOption(createPixelRangeConfigOption(OPT_X_SCALING, DESC_X_SCALING));
+        optionGroup.addOption(createPixelRangeConfigOption(OPT_Y_SCALING, DESC_Y_SCALING));
+        optionGroup.addOption(createPixelRangeConfigOption(OPT_X_PADDING, DESC_X_PADDING));
+        optionGroup.addOption(createPixelRangeConfigOption(OPT_Y_PADDING, DESC_Y_PADDING));
+        return optionGroup;
     }
 
     private static Option createInputFileOption()
@@ -75,9 +65,8 @@ public class SingleArgumentParser
         return new Option(name, true, description);
     }
 
-    public SingleConversionConfig createConfigFromArguments(final String[] arguments) throws ParseException
+    public SingleConversionConfig createConfigFrom(final CommandLine commandLine)
     {
-        final CommandLine commandLine = parser.parse(options, arguments);
         final String inputFilePath = commandLine.getOptionValue(OPT_INPUT_FILE);
         final SingleConversionConfig config = new SingleConversionConfig();
         config.setInputFilePath(inputFilePath);
@@ -104,10 +93,5 @@ public class SingleArgumentParser
             final String optionString = commandLine.getOptionValue(optionName);
             pixelRange.set(NinePatchOptionUtil.parsePixelRange(optionString));
         }
-    }
-
-    public void printHelp()
-    {
-        helpFormatter.printHelp(CMD_LINE_SYNTAX, options);
     }
 }
