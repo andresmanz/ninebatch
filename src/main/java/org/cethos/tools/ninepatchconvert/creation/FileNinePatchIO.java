@@ -23,23 +23,23 @@ public class FileNinePatchIO implements NinePatchIO
     @Override
     public void writeNinePatchFor(final RenderedImage image, final String originalFileName) throws IOException
     {
-        ImageIO.write(image, "png", getInputFileFor(originalFileName));
-    }
-
-    private File getInputFileFor(final String inputFileName)
-    {
-        return new File(baseInputDirectory, inputFileName);
-    }
-
-    @Override
-    public BufferedImage read(final String fileName) throws IOException
-    {
-        return ImageIO.read(getNinePatchFileFor(fileName));
+        ImageIO.write(image, "png", getNinePatchFileFor(originalFileName));
     }
 
     private File getNinePatchFileFor(final String imageFileName)
     {
         final String ninePatchFileName = NinePatchUtil.getNinePatchFileNameFor(imageFileName);
         return new File(baseOutputDirectory, ninePatchFileName);
+    }
+
+    @Override
+    public BufferedImage read(final String fileName) throws IOException
+    {
+        return ImageIO.read(getInputFileFor(fileName));
+    }
+
+    private File getInputFileFor(final String inputFileName)
+    {
+        return new File(baseInputDirectory, inputFileName);
     }
 }
