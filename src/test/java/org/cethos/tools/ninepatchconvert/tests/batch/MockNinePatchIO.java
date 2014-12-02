@@ -22,13 +22,13 @@ public class MockNinePatchIO implements NinePatchIO
     }
 
     @Override
-    public void writeNinePatchFor(RenderedImage image, String fileName) throws IOException
+    public void writeNinePatchFor(final RenderedImage image, final String fileName) throws IOException
     {
         ++totalWriteCount;
     }
 
     @Override
-    public BufferedImage read(String fileName) throws IOException
+    public BufferedImage read(final String fileName) throws IOException
     {
         ++totalReadCount;
         return new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB);
