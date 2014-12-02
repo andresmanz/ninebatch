@@ -8,7 +8,49 @@ public class ImageProcessorFactory
 {
     public ImageProcessor createFrom(final String[] args) throws ParseException
     {
-        return createBatchImageProcessor(args);
+        ImageProcessor imageProcessor;
+
+        if(hasSingleConversionOption(args))
+        {
+            imageProcessor = createSingleImageProcessor(args);
+        }
+        else
+        {
+            imageProcessor = createBatchImageProcessor(args);
+        }
+
+        return imageProcessor;
+    }
+
+    private static boolean hasSingleConversionOption(final String[] args)
+    {
+        boolean hasOption = false;
+        for(int i = 0; i < args.length; ++i)
+        {
+            if(args[i].equals("-s"))
+            {
+                hasOption = true;
+            }
+        }
+
+        return hasOption;
+    }
+
+    private static ImageProcessor createSingleImageProcessor(final String[] args) throws ParseException
+    {
+        final SingleArgumentParser argumentParser = new SingleArgumentParser();
+
+        try
+        {
+            final SingleConversionConfig config = argumentParser.createConfigFromArguments(args);
+            final SingleImageProcessor imageProcessor = new SingleImageProcessor(config);
+            return imageProcessor;
+        }
+        catch(final ParseException exception)
+        {
+            argumentParser.printHelp();
+            throw exception;
+        }
     }
 
     private static ImageProcessor createBatchImageProcessor(final String[] args) throws ParseException

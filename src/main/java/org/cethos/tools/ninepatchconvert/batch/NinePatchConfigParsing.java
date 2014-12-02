@@ -3,6 +3,7 @@ package org.cethos.tools.ninepatchconvert.batch;
 import com.esotericsoftware.jsonbeans.JsonReader;
 import com.esotericsoftware.jsonbeans.JsonValue;
 
+import org.cethos.tools.ninepatchconvert.NinePatchOptionUtil;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 import org.cethos.tools.ninepatchconvert.creation.PixelRange;
 
@@ -54,16 +55,6 @@ public class NinePatchConfigParsing
     private static PixelRange getPixelRangeByKeyFrom(final String key, final JsonValue ninePatchValue)
     {
         final String rangeString = ninePatchValue.getString(key, "0-0");
-        return parsePixelRange(rangeString);
-    }
-
-    private static PixelRange parsePixelRange(final String pixelRangeString)
-    {
-        final String[] splitRangeStrings = pixelRangeString.split("-");
-        final int begin = Integer.parseInt(splitRangeStrings[0]);
-        final int end = Integer.parseInt(splitRangeStrings[1]);
-        final PixelRange pixelRange = new PixelRange();
-        pixelRange.set(begin, end);
-        return pixelRange;
+        return NinePatchOptionUtil.parsePixelRange(rangeString);
     }
 }

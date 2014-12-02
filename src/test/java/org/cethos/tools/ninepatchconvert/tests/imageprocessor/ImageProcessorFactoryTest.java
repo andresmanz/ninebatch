@@ -4,6 +4,7 @@ import org.apache.commons.cli.ParseException;
 import org.cethos.tools.ninepatchconvert.imageprocessor.BatchImageProcessor;
 import org.cethos.tools.ninepatchconvert.imageprocessor.ImageProcessor;
 import org.cethos.tools.ninepatchconvert.imageprocessor.ImageProcessorFactory;
+import org.cethos.tools.ninepatchconvert.imageprocessor.SingleImageProcessor;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,10 +36,28 @@ public class ImageProcessorFactoryTest
     @Test
     public void testCreateFrom_withInputDirOnly() throws ParseException
     {
-        final String[] args = new String[2];
-        args[0] = "-i";
-        args[1] = "/test/directory";
+        final String[] args = getArgsFrom("-i /test/directory");
         createAndAssertIsCorrectInstance(args, BatchImageProcessor.class);
+    }
+
+    @Test
+    public void testCreateFrom_withSingleConversionAndWithoutArguments() throws ParseException
+    {
+        final String[] args = getArgsFrom("-s");
+        thrown.expect(ParseException.class);
+        processorFactory.createFrom(args);
+    }
+
+    @Test
+    public void testCreateFrom_withInputFileOnly() throws ParseException
+    {
+        final String[] args = getArgsFrom("-s -i /test/file.png");
+        createAndAssertIsCorrectInstance(args, SingleImageProcessor.class);
+    }
+
+    private String[] getArgsFrom(final String argsString)
+    {
+        return argsString.split(" ");
     }
 
     private void createAndAssertIsCorrectInstance(final String[] args, final Class expectedClass) throws ParseException
