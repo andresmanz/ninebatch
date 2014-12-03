@@ -1,4 +1,4 @@
-package org.cethos.tools.ninepatchconvert.conversion;
+package org.cethos.tools.ninepatchconvert.conversion.argumenthandler;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;

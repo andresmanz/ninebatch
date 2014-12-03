@@ -18,31 +18,31 @@ public class ConversionParsing
 
     public static Map<String, NinePatchConfig> parse(final String jsonConfig)
     {
-        final JsonValue ninePatchesValue = getNinePatchesValueFrom(jsonConfig);
-        return getNinePatchConfigsFrom(ninePatchesValue);
+        final JsonValue conversionsValue = getConversionsValueFrom(jsonConfig);
+        return getConversionsFrom(conversionsValue);
     }
 
-    private static JsonValue getNinePatchesValueFrom(final String jsonConfig)
+    private static JsonValue getConversionsValueFrom(final String jsonConfig)
     {
         final JsonReader jsonReader = new JsonReader();
         final JsonValue root = jsonReader.parse(jsonConfig);
-        final JsonValue ninePatchesValue = root.get("ninePatches");
-        return ninePatchesValue;
+        final JsonValue conversionsValue = root.get("ninePatches");
+        return conversionsValue;
     }
 
-    private static Map<String, NinePatchConfig> getNinePatchConfigsFrom(final JsonValue ninePatchesValue)
+    private static Map<String, NinePatchConfig> getConversionsFrom(final JsonValue conversionsValue)
     {
-        final Map<String, NinePatchConfig> ninePatchConfigs = new HashMap<String, NinePatchConfig>();
-        for(final JsonValue ninePatchValue : ninePatchesValue.iterator())
+        final Map<String, NinePatchConfig> conversions = new HashMap<String, NinePatchConfig>();
+        for(final JsonValue ninePatchValue : conversionsValue.iterator())
         {
-            final NinePatchConfig config = getSingleNinePatchConfigFrom(ninePatchValue);
-            ninePatchConfigs.put(ninePatchValue.name(), config);
+            final NinePatchConfig config = getNinePatchConfigFrom(ninePatchValue);
+            conversions.put(ninePatchValue.name(), config);
         }
 
-        return ninePatchConfigs;
+        return conversions;
     }
 
-    private static NinePatchConfig getSingleNinePatchConfigFrom(final JsonValue ninePatchValue)
+    private static NinePatchConfig getNinePatchConfigFrom(final JsonValue ninePatchValue)
     {
         final NinePatchConfig ninePatchConfig = new NinePatchConfig();
         ninePatchConfig.xScalingRange.set(getPixelRangeByKeyFrom("xScalingRange", ninePatchValue));

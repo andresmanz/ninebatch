@@ -1,13 +1,14 @@
-package org.cethos.tools.ninepatchconvert.conversion;
+package org.cethos.tools.ninepatchconvert.conversion.argumenthandler;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionGroup;
+import org.apache.commons.cli.Options;
 import org.cethos.tools.ninepatchconvert.NinePatchOptionUtil;
+import org.cethos.tools.ninepatchconvert.conversion.SingleConversionConfig;
 import org.cethos.tools.ninepatchconvert.creation.NinePatchConfig;
 import org.cethos.tools.ninepatchconvert.creation.PixelRange;
 
-public class SingleArgumentParser
+public class SingleImageArgumentHandler
 {
     private static final String OPT_INPUT_FILE = "i";
     private static final String OPT_X_SCALING = "xs";
@@ -23,25 +24,30 @@ public class SingleArgumentParser
     private static final String DESC_X_PADDING = "x padding range, eg '5-10'";
     private static final String DESC_Y_PADDING = "y padding range, eg '5-10'";
 
-    private final OptionGroup optionGroup;
+    private final Options options;
 
-    public SingleArgumentParser()
+    public SingleImageArgumentHandler()
     {
-        this.optionGroup = createCommandLineOptionGroup();
+        this.options = createCommandLineOptionGroup();
     }
 
-    private static OptionGroup createCommandLineOptionGroup()
+    public Options getOptions()
+    {
+        return options;
+    }
+
+    private static Options createCommandLineOptionGroup()
     {
         final Option inputFileOption = createInputFileOption();
 
-        OptionGroup optionGroup = new OptionGroup();
-        optionGroup.addOption(inputFileOption);
-        optionGroup.addOption(new Option("s", "process single image"));
-        optionGroup.addOption(createPixelRangeConfigOption(OPT_X_SCALING, DESC_X_SCALING));
-        optionGroup.addOption(createPixelRangeConfigOption(OPT_Y_SCALING, DESC_Y_SCALING));
-        optionGroup.addOption(createPixelRangeConfigOption(OPT_X_PADDING, DESC_X_PADDING));
-        optionGroup.addOption(createPixelRangeConfigOption(OPT_Y_PADDING, DESC_Y_PADDING));
-        return optionGroup;
+        final Options options = new Options();
+        options.addOption(inputFileOption);
+        options.addOption(new Option("s", "process single image"));
+        options.addOption(createPixelRangeConfigOption(OPT_X_SCALING, DESC_X_SCALING));
+        options.addOption(createPixelRangeConfigOption(OPT_Y_SCALING, DESC_Y_SCALING));
+        options.addOption(createPixelRangeConfigOption(OPT_X_PADDING, DESC_X_PADDING));
+        options.addOption(createPixelRangeConfigOption(OPT_Y_PADDING, DESC_Y_PADDING));
+        return options;
     }
 
     private static Option createInputFileOption()

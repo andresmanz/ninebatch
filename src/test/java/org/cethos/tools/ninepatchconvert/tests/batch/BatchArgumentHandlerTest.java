@@ -5,7 +5,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.cethos.tools.ninepatchconvert.conversion.BatchArgumentHandler;
+import org.cethos.tools.ninepatchconvert.conversion.argumenthandler.BatchArgumentHandler;
 import org.cethos.tools.ninepatchconvert.batch.BatchConfig;
 import org.junit.Before;
 import org.junit.Rule;
@@ -55,7 +55,7 @@ public class BatchArgumentHandlerTest
     private CommandLine createCommandLine(final String[] args) throws ParseException
     {
         final CommandLineParser parser = new BasicParser();
-        final Options options = new Options();
+        final Options options = argumentHandler.getOptions();
         return parser.parse(options, args);
     }
 }
