@@ -11,11 +11,8 @@ import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
 
 public class BatchArgumentParser
 {
-    private static final String OPT_INPUT_DIR = "i";
     private static final String OPT_OUTPUT_DIR = "o";
-    private static final String LONG_OPT_INPUT_DIR = "input-directory";
     private static final String LONG_OPT_OUTPUT_DIR = "output-directory";
-    private static final String DESC_INPUT_DIR = "input directory containing the images and config file";
     private static final String DESC_OUTPUT_DIR = "ninebatch output directory";
     private static final String CMD_LINE_SYNTAX = "ninebatch [OPTIONS] input-directory";
 
@@ -32,20 +29,9 @@ public class BatchArgumentParser
 
     private static Options createCommandLineOptions()
     {
-        final Option inputDirOption = createInputDirectoryOption();
-        final Option outputDirOption = createOutputDirectoryOption();
-
-        final Options optionGroup = new Options();
-        optionGroup.addOption(inputDirOption);
-        optionGroup.addOption(outputDirOption);
-        return optionGroup;
-    }
-
-    private static Option createInputDirectoryOption()
-    {
-        final Option option = createDirectoryOption(OPT_INPUT_DIR, LONG_OPT_INPUT_DIR, DESC_INPUT_DIR);
-        option.setRequired(true);
-        return option;
+        final Options options = new Options();
+        options.addOption(createOutputDirectoryOption());
+        return options;
     }
 
     private static Option createOutputDirectoryOption()
@@ -66,11 +52,30 @@ public class BatchArgumentParser
 
     public BatchConfig createConfigFrom(final String[] args) throws ParseException
     {
-        final CommandLine commandLine = commandLineParser.parse(options, args);
-        final String inputDirPath = commandLine.getOptionValue(OPT_INPUT_DIR);
-        final String outputDirPath = commandLine.getOptionValue(OPT_OUTPUT_DIR, inputDirPath);
-        final BatchConfig batchConfig = new BatchConfig(inputDirPath, outputDirPath);
-        return batchConfig;
+        try
+        {
+            final CommandLine commandLine = commandLineParser.parse(options, args);
+            final String inputDirPath = getInputDirPathFrom(commandLine);
+            final String outputDirPath = commandLine.getOptionValue(OPT_OUTPUT_DIR, inputDirPath);
+            return new BatchConfig(inputDirPath, outputDirPath);
+        }
+        catch(final ParseException exception)
+        {
+            printHelp();
+            throw exception;
+        }
+    }
+
+    private String getInputDirPathFrom(final CommandLine commandLine) throws ParseException
+    {
+        if(commandLine.getArgList().size() > 0)
+        {
+            return (String)commandLine.getArgList().get(0);
+        }
+        else
+        {
+            throw new ParseException("Missing required option: input directory");
+        }
     }
 
     public void printHelp()

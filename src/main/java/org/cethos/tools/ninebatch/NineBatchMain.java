@@ -1,5 +1,6 @@
 package org.cethos.tools.ninebatch;
 
+import org.apache.commons.cli.ParseException;
 import org.cethos.tools.ninebatch.conversion.BatchArgumentParser;
 import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
 import org.cethos.tools.ninebatch.conversion.streamprovider.RelativeFileStreamProvider;
@@ -11,15 +12,21 @@ public class NineBatchMain
     {
         try
         {
-            final BatchArgumentParser argumentParser = new BatchArgumentParser();
-            final BatchConfig batchConfig = argumentParser.createConfigFrom(args);
-            final StreamProvider streamProvider = new RelativeFileStreamProvider(batchConfig);
+            final StreamProvider streamProvider = createStreamProviderFrom(args);
             final DefaultConversionProcessor processor = new DefaultConversionProcessor(streamProvider);
             processor.loadAndProcessConversions();
         }
         catch(final Exception e)
         {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
+    }
+
+    private static StreamProvider createStreamProviderFrom(final String[] args) throws ParseException
+    {
+        final BatchArgumentParser argumentParser = new BatchArgumentParser();
+        final BatchConfig batchConfig = argumentParser.createConfigFrom(args);
+        final StreamProvider streamProvider = new RelativeFileStreamProvider(batchConfig);
+        return streamProvider;
     }
 }

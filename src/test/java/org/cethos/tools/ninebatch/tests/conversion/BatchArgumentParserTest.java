@@ -34,17 +34,18 @@ public class BatchArgumentParserTest
     }
 
     @Test
+    public void testCreateConfigFromArguments_withInputDirectoryOnly() throws ParseException
+    {
+        final String[] args = CommandLineUtil.getArgsFrom("testinputdirectory");
+        final BatchConfig config = argumentHandler.createConfigFrom(args);
+        assertEquals(config.getInputDirPath(), "testinputdirectory");
+        assertEquals(config.getOutputDirPath(), "testinputdirectory");
+    }
+
+    @Test
     public void testCreateConfigFromArguments_withInputAndOutputDirectory() throws ParseException
     {
-        final String[] arguments = new String[4];
-        arguments[0] = "-i";
-        arguments[1] = "testinputdirectory";
-        arguments[2] = "-o";
-        arguments[3] = "testoutputdirectory";
-
-        final String argumentString = "-i testinputdirectory -o testoutputdirectory";
-        final String[] args = CommandLineUtil.getArgsFrom(argumentString);
-
+        final String[] args = CommandLineUtil.getArgsFrom("-o testoutputdirectory testinputdirectory");
         final BatchConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testoutputdirectory");
