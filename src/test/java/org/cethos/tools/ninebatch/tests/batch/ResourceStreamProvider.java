@@ -9,21 +9,36 @@ import java.io.OutputStream;
 
 public class ResourceStreamProvider implements StreamProvider
 {
+    private final String basePath;
     private int totalOutputStreamAccessCount;
     private int totalInputStreamAccessCount;
 
+    public ResourceStreamProvider(final String basePath)
+    {
+        this.basePath = basePath;
+    }
+
     @Override
-    public OutputStream getOutputStreamFor(String fileName) throws FileNotFoundException
+    public OutputStream getOutputStreamFor(final String fileName) throws FileNotFoundException
     {
         ++totalOutputStreamAccessCount;
         return new ByteArrayOutputStream();
     }
 
     @Override
-    public InputStream getInputStreamFor(String fileName) throws FileNotFoundException
+    public InputStream getInputStreamFor(final String fileName) throws FileNotFoundException
     {
         ++totalInputStreamAccessCount;
-        return getClass().getResourceAsStream(fileName);
+
+        final InputStream stream = getClass().getResourceAsStream(basePath + "/" + fileName);
+        if(stream == null)
+        {
+            throw new FileNotFoundException("File not found: " + fileName);
+        }
+        else
+        {
+            return stream;
+        }
     }
 
     public int getTotalOutputStreamAccessCount()

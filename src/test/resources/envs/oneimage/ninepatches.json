@@ -1,0 +1,10 @@
+{
+    "ninePatches": {
+        "testimage.png": {
+            "xScalingRange": "16-48",
+            "yScalingRange": "16-48",
+            "xPaddingRange": "18-46",
+            "yPaddingRange": "18-46",
+        },
+    }
+}

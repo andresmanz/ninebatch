@@ -1,8 +1,8 @@
 package org.cethos.tools.ninebatch.tests.conversion;
 
 import org.apache.commons.cli.ParseException;
-import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
 import org.cethos.tools.ninebatch.conversion.BatchArgumentParser;
+import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
 import org.cethos.tools.ninebatch.tests.testutil.CommandLineUtil;
 import org.junit.Before;
 import org.junit.Rule;

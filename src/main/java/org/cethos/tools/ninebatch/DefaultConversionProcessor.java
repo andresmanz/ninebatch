@@ -28,7 +28,7 @@ public class DefaultConversionProcessor
         conversionBatch.process(conversions);
     }
 
-    public Map<String, NinePatchConfig> loadConversions() throws IOException
+    private Map<String, NinePatchConfig> loadConversions() throws IOException
     {
         final String conversionJson = loadConversionJson();
         final Map<String, NinePatchConfig> conversions = ConversionParsing.parse(conversionJson);

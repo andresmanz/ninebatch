@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.tests;
+package org.cethos.tools.ninebatch.tests.util;
 
 import org.cethos.tools.ninebatch.util.NinePatchUtil;
 import org.junit.Test;

@@ -1,14 +1,10 @@
 package org.cethos.tools.ninebatch.conversion;
 
-import org.apache.commons.io.IOUtils;
-import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
 import org.cethos.tools.ninebatch.conversion.streamprovider.StreamProvider;
 import org.cethos.tools.ninebatch.util.NinePatchUtil;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 

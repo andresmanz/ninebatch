@@ -20,7 +20,7 @@ public class ConversionBatchTest
     @Before
     public void beforeTest()
     {
-        this.streamProvider = new ResourceStreamProvider();
+        this.streamProvider = new ResourceStreamProvider("/images");
         this.conversionBatch = new ConversionBatch(streamProvider);
     }
 
@@ -39,7 +39,7 @@ public class ConversionBatchTest
     public void testProcess_withOneImage()
     {
         final Map<String, NinePatchConfig> conversions = new HashMap<String, NinePatchConfig>();
-        conversions.put("/images/testimage.png", new NinePatchConfig());
+        conversions.put("testimage.png", new NinePatchConfig());
         conversionBatch.process(conversions);
         assertEquals(1, streamProvider.getTotalInputStreamAccessCount());
         assertEquals(1, streamProvider.getTotalOutputStreamAccessCount());
@@ -49,8 +49,9 @@ public class ConversionBatchTest
     public void testProcess_withNonExistentImagePath()
     {
         final Map<String, NinePatchConfig> conversions = new HashMap<String, NinePatchConfig>();
-        conversions.put("/images/thisdoesnotexist.png", new NinePatchConfig());
-        thrown.expect(IllegalArgumentException.class);
+        conversions.put("/thisdoesnotexist.png", new NinePatchConfig());
         conversionBatch.process(conversions);
+        assertEquals(1, streamProvider.getTotalInputStreamAccessCount());
+        assertEquals(0, streamProvider.getTotalOutputStreamAccessCount());
     }
 }
