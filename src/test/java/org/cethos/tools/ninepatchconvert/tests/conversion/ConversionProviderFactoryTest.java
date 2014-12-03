@@ -13,7 +13,7 @@ import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class ConversionProviderFactoryTest
 {

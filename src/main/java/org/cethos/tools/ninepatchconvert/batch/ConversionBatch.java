@@ -7,9 +7,7 @@ import org.cethos.tools.ninepatchconvert.creation.NinePatchIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class ConversionBatch
 {

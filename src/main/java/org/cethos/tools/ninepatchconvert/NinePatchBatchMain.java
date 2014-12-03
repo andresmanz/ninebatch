@@ -1,9 +1,9 @@
 package org.cethos.tools.ninepatchconvert;
 
 import org.cethos.tools.ninepatchconvert.batch.ConversionBatch;
+import org.cethos.tools.ninepatchconvert.conversion.ConversionProviderFactory;
 import org.cethos.tools.ninepatchconvert.conversion.provider.ConversionProvider;
 import org.cethos.tools.ninepatchconvert.creation.FileNinePatchIO;
-import org.cethos.tools.ninepatchconvert.conversion.ConversionProviderFactory;
 
 public class NinePatchBatchMain
 {
