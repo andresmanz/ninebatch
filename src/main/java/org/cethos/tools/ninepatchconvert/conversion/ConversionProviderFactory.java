@@ -47,7 +47,7 @@ public class ConversionProviderFactory
 
     private boolean isSetToSingleImage(final String[] args) throws ParseException
     {
-        return (args[0].equals(OPT_SINGLE_IMAGE));
+        return ((args.length > 0) && (args[0].equals(OPT_SINGLE_IMAGE)));
     }
 
     private ConversionProvider createSingleConversionProviderFrom(final String[] args) throws ParseException

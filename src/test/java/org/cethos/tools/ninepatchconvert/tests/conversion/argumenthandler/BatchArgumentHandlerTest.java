@@ -1,4 +1,4 @@
-package org.cethos.tools.ninepatchconvert.tests.batch;
+package org.cethos.tools.ninepatchconvert.tests.conversion.argumenthandler;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
