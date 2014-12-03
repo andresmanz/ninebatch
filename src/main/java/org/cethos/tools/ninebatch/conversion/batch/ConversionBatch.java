@@ -1,8 +1,9 @@
 package org.cethos.tools.ninebatch.conversion.batch;
 
+import org.cethos.tools.ninebatch.conversion.StreamConversionIO;
+import org.cethos.tools.ninebatch.conversion.streamprovider.StreamProvider;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 import org.cethos.tools.ninebatch.creation.NinePatchCreation;
-import org.cethos.tools.ninebatch.conversion.ConversionIO;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -10,11 +11,11 @@ import java.util.Map;
 
 public class ConversionBatch
 {
-    private final ConversionIO conversionIO;
+    private final StreamConversionIO streamConversionIO;
 
-    public ConversionBatch(final ConversionIO conversionIO)
+    public ConversionBatch(final StreamProvider streamProvider)
     {
-        this.conversionIO = conversionIO;
+        this.streamConversionIO = new StreamConversionIO(streamProvider);
     }
 
     public void process(final Map<String, NinePatchConfig> conversions)
@@ -41,8 +42,8 @@ public class ConversionBatch
     private void convertAndSaveNinePatch(final String inputImageFilePath, final NinePatchConfig config)
             throws IOException
     {
-        final BufferedImage inputImage = conversionIO.read(inputImageFilePath);
+        final BufferedImage inputImage = streamConversionIO.read(inputImageFilePath);
         final BufferedImage ninePatch = NinePatchCreation.createFrom(inputImage, config);
-        conversionIO.writeNinePatchFor(ninePatch, inputImageFilePath);
+        streamConversionIO.writeNinePatchFor(ninePatch, inputImageFilePath);
     }
 }

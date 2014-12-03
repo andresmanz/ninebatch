@@ -2,7 +2,10 @@ package org.cethos.tools.ninebatch.tests.batch;
 
 import org.cethos.tools.ninebatch.conversion.batch.ConversionBatch;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,28 +14,43 @@ import static org.junit.Assert.assertEquals;
 
 public class ConversionBatchTest
 {
+    private ResourceStreamProvider streamProvider;
+    private ConversionBatch conversionBatch;
+
+    @Before
+    public void beforeTest()
+    {
+        this.streamProvider = new ResourceStreamProvider();
+        this.conversionBatch = new ConversionBatch(streamProvider);
+    }
+
+    @Rule
+    public final ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void testProcess_withZeroImages()
     {
-        final MockConversionIO imageInputOutput = new MockConversionIO();
-        final ConversionBatch conversionBatch = new ConversionBatch(imageInputOutput);
         conversionBatch.process(new HashMap<String, NinePatchConfig>());
-        assertEquals(0, imageInputOutput.getTotalReadCount());
-        assertEquals(0, imageInputOutput.getTotalWriteCount());
+        assertEquals(0, streamProvider.getTotalInputStreamAccessCount());
+        assertEquals(0, streamProvider.getTotalOutputStreamAccessCount());
     }
 
     @Test
-    public void testProcess_withTwoImages()
+    public void testProcess_withOneImage()
     {
-        final MockConversionIO imageInputOutput = new MockConversionIO();
-        final ConversionBatch conversionBatch = new ConversionBatch(imageInputOutput);
-
         final Map<String, NinePatchConfig> conversions = new HashMap<String, NinePatchConfig>();
-        conversions.put("testfile1.png", new NinePatchConfig());
-        conversions.put("testfile2.png", new NinePatchConfig());
+        conversions.put("/images/testimage.png", new NinePatchConfig());
         conversionBatch.process(conversions);
+        assertEquals(1, streamProvider.getTotalInputStreamAccessCount());
+        assertEquals(1, streamProvider.getTotalOutputStreamAccessCount());
+    }
 
-        assertEquals(2, imageInputOutput.getTotalReadCount());
-        assertEquals(2, imageInputOutput.getTotalWriteCount());
+    @Test
+    public void testProcess_withNonExistentImagePath()
+    {
+        final Map<String, NinePatchConfig> conversions = new HashMap<String, NinePatchConfig>();
+        conversions.put("/images/thisdoesnotexist.png", new NinePatchConfig());
+        thrown.expect(IllegalArgumentException.class);
+        conversionBatch.process(conversions);
     }
 }
