@@ -16,7 +16,6 @@ import javax.imageio.ImageIO;
 
 public class StreamConversionIO
 {
-    private static final String CONVERSION_CONFIG_FILE_NAME = "ninepatches.json";
 
     private final StreamProvider streamProvider;
 
@@ -37,13 +36,5 @@ public class StreamConversionIO
         final BufferedImage image = ImageIO.read(inputStream);
         inputStream.close();
         return image;
-    }
-
-    public String loadConversionJson() throws IOException
-    {
-        final InputStream inputStream = streamProvider.getInputStreamFor(CONVERSION_CONFIG_FILE_NAME);
-        final String json = IOUtils.toString(inputStream);
-        inputStream.close();
-        return json;
     }
 }
