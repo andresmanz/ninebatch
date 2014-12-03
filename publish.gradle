@@ -42,16 +42,16 @@ uploadArchives {
             }
 
             pom.project {
-                name 'NinePatch Convert'
+                name 'NineBatch'
                 packaging 'jar'
-                artifactId 'ninepatch-convert'
+                artifactId 'ninebatch'
                 description 'A small tool that batch converts regular images to nine-patches.'
-                url 'https://github.com/andresmanz/ninepatch-convert'
+                url 'https://github.com/andresmanz/ninebatch'
 
                 scm {
-                    connection 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
-                    developerConnection 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
-                    url 'scm:git:https://github.com/andresmanz/ninepatch-convert.git'
+                    connection 'scm:git:https://github.com/andresmanz/ninebatch.git'
+                    developerConnection 'scm:git:https://github.com/andresmanz/ninebatch.git'
+                    url 'scm:git:https://github.com/andresmanz/ninebatch.git'
                 }
 
                 licenses {

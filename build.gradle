@@ -15,7 +15,7 @@ apply plugin: 'application'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 
-mainClassName = 'org.cethos.tools.ninepatchconvert.NinePatchConvert'
+mainClassName = 'org.cethos.tools.ninebatch.NineBatchMain'
 
 allprojects {
     version = '1.1-SNAPSHOT'

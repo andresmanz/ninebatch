@@ -1,9 +1,9 @@
-ninepatch-convert
+ninebatch
 =================
-[![Build Status](https://travis-ci.org/andresmanz/ninepatch-convert.svg?branch=master)](https://travis-ci.org/andresmanz/ninepatch-convert)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.cethos.tools/ninepatch-convert/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.cethos.tools/ninepatch-convert)
+[![Build Status](https://travis-ci.org/andresmanz/ninebatch.svg?branch=master)](https://travis-ci.org/andresmanz/ninebatch)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.cethos.tools/ninebatch/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.cethos.tools/ninebatch)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![Coverage Status](https://img.shields.io/coveralls/andresmanz/ninepatch-convert.svg)](https://coveralls.io/r/andresmanz/ninepatch-convert?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/andresmanz/ninebatch.svg)](https://coveralls.io/r/andresmanz/ninebatch?branch=master)
 
 Creating ninepatches by hand can be awful, especially if every developer has to create them himself (e.g. if the base images are exported from vector graphics or similar). This tool is optimized for usage in an automatic export system. In my case, that system is a gradle plugin.
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$TRAVIS_REPO_SLUG" == "andresmanz/ninepatch-convert" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
+if [ "$TRAVIS_REPO_SLUG" == "andresmanz/ninebatch" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
     if [[ $(./gradlew -q getVersion) != *SNAPSHOT* ]]; then
         echo 'Travis can only publish snapshots.'
         return 0
