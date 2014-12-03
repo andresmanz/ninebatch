@@ -1,12 +1,12 @@
 package org.cethos.tools.ninebatch.tests.batch;
 
-import org.cethos.tools.ninebatch.creation.NinePatchIO;
+import org.cethos.tools.ninebatch.conversion.ConversionIO;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 
-public class MockNinePatchIO implements NinePatchIO
+public class MockConversionIO implements ConversionIO
 {
     private int totalWriteCount;
     private int totalReadCount;
@@ -32,5 +32,11 @@ public class MockNinePatchIO implements NinePatchIO
     {
         ++totalReadCount;
         return new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB);
+    }
+
+    @Override
+    public String loadConversionJson() throws IOException
+    {
+        return null;
     }
 }

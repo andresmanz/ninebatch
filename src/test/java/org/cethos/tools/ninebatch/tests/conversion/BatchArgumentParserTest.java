@@ -1,12 +1,9 @@
-package org.cethos.tools.ninebatch.tests.conversion.argumenthandler;
+package org.cethos.tools.ninebatch.tests.conversion;
 
-import org.apache.commons.cli.BasicParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.cethos.tools.ninebatch.batch.BatchConfig;
-import org.cethos.tools.ninebatch.conversion.argumenthandler.BatchArgumentHandler;
+import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
+import org.cethos.tools.ninebatch.conversion.BatchArgumentParser;
+import org.cethos.tools.ninebatch.tests.testutil.CommandLineUtil;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,9 +11,9 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
-public class BatchArgumentHandlerTest
+public class BatchArgumentParserTest
 {
-    private BatchArgumentHandler argumentHandler;
+    private BatchArgumentParser argumentHandler;
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
@@ -24,7 +21,7 @@ public class BatchArgumentHandlerTest
     @Before
     public void beforeTest()
     {
-        this.argumentHandler = new BatchArgumentHandler();
+        this.argumentHandler = new BatchArgumentParser();
     }
 
     @Test
@@ -33,8 +30,7 @@ public class BatchArgumentHandlerTest
         final String[] arguments = new String[0];
         thrown.expect(ParseException.class);
         thrown.expectMessage("Missing required option");
-        final CommandLine commandLine = createCommandLine(arguments);
-        argumentHandler.createConfigFrom(commandLine);
+        argumentHandler.createConfigFrom(arguments);
     }
 
     @Test
@@ -46,16 +42,11 @@ public class BatchArgumentHandlerTest
         arguments[2] = "-o";
         arguments[3] = "testoutputdirectory";
 
-        final CommandLine commandLine = createCommandLine(arguments);
-        final BatchConfig config = argumentHandler.createConfigFrom(commandLine);
+        final String argumentString = "-i testinputdirectory -o testoutputdirectory";
+        final String[] args = CommandLineUtil.getArgsFrom(argumentString);
+
+        final BatchConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testoutputdirectory");
-    }
-
-    private CommandLine createCommandLine(final String[] args) throws ParseException
-    {
-        final CommandLineParser parser = new BasicParser();
-        final Options options = argumentHandler.getOptions();
-        return parser.parse(options, args);
     }
 }

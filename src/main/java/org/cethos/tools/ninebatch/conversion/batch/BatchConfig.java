@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.batch;
+package org.cethos.tools.ninebatch.conversion.batch;
 
 public class BatchConfig
 {

@@ -1,6 +1,6 @@
 package org.cethos.tools.ninebatch.tests;
 
-import org.cethos.tools.ninebatch.NinePatchUtil;
+import org.cethos.tools.ninebatch.util.NinePatchUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

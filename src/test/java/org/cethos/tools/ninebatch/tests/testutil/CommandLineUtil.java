@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.tests;
+package org.cethos.tools.ninebatch.tests.testutil;
 
 public class CommandLineUtil
 {

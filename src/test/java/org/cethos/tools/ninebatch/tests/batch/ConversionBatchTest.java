@@ -1,10 +1,11 @@
 package org.cethos.tools.ninebatch.tests.batch;
 
-import org.cethos.tools.ninebatch.batch.ConversionBatch;
+import org.cethos.tools.ninebatch.conversion.batch.ConversionBatch;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,10 +14,9 @@ public class ConversionBatchTest
     @Test
     public void testProcess_withZeroImages()
     {
-        final MockNinePatchIO imageInputOutput = new MockNinePatchIO();
-        final ConversionBatch conversionBatch = new ConversionBatch();
-        conversionBatch.add(new HashMap<String, NinePatchConfig>());
-        conversionBatch.process(imageInputOutput);
+        final MockConversionIO imageInputOutput = new MockConversionIO();
+        final ConversionBatch conversionBatch = new ConversionBatch(imageInputOutput);
+        conversionBatch.process(new HashMap<String, NinePatchConfig>());
         assertEquals(0, imageInputOutput.getTotalReadCount());
         assertEquals(0, imageInputOutput.getTotalWriteCount());
     }
@@ -24,12 +24,13 @@ public class ConversionBatchTest
     @Test
     public void testProcess_withTwoImages()
     {
-        final MockNinePatchIO imageInputOutput = new MockNinePatchIO();
-        final ConversionBatch conversionBatch = new ConversionBatch();
+        final MockConversionIO imageInputOutput = new MockConversionIO();
+        final ConversionBatch conversionBatch = new ConversionBatch(imageInputOutput);
 
-        conversionBatch.add("testfile1.png", new NinePatchConfig());
-        conversionBatch.add("testfile2.png", new NinePatchConfig());
-        conversionBatch.process(imageInputOutput);
+        final Map<String, NinePatchConfig> conversions = new HashMap<String, NinePatchConfig>();
+        conversions.put("testfile1.png", new NinePatchConfig());
+        conversions.put("testfile2.png", new NinePatchConfig());
+        conversionBatch.process(conversions);
 
         assertEquals(2, imageInputOutput.getTotalReadCount());
         assertEquals(2, imageInputOutput.getTotalWriteCount());

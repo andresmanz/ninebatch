@@ -1,11 +1,15 @@
-package org.cethos.tools.ninebatch.conversion.argumenthandler;
+package org.cethos.tools.ninebatch.conversion;
 
+import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.cethos.tools.ninebatch.batch.BatchConfig;
+import org.apache.commons.cli.ParseException;
+import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
 
-public class BatchArgumentHandler
+public class BatchArgumentParser
 {
     private static final String OPT_INPUT_DIR = "i";
     private static final String OPT_OUTPUT_DIR = "o";
@@ -13,17 +17,17 @@ public class BatchArgumentHandler
     private static final String LONG_OPT_OUTPUT_DIR = "output-directory";
     private static final String DESC_INPUT_DIR = "input directory containing the images and config file";
     private static final String DESC_OUTPUT_DIR = "ninebatch output directory";
+    private static final String CMD_LINE_SYNTAX = "ninebatch [OPTIONS] input-directory";
 
     private final Options options;
+    private final HelpFormatter helpFormatter;
+    private final CommandLineParser commandLineParser;
 
-    public BatchArgumentHandler()
+    public BatchArgumentParser()
     {
         this.options = createCommandLineOptions();
-    }
-
-    public Options getOptions()
-    {
-        return options;
+        this.helpFormatter = new HelpFormatter();
+        this.commandLineParser = new BasicParser();
     }
 
     private static Options createCommandLineOptions()
@@ -60,11 +64,17 @@ public class BatchArgumentHandler
         return option;
     }
 
-    public BatchConfig createConfigFrom(final CommandLine commandLine)
+    public BatchConfig createConfigFrom(final String[] args) throws ParseException
     {
+        final CommandLine commandLine = commandLineParser.parse(options, args);
         final String inputDirPath = commandLine.getOptionValue(OPT_INPUT_DIR);
         final String outputDirPath = commandLine.getOptionValue(OPT_OUTPUT_DIR, inputDirPath);
         final BatchConfig batchConfig = new BatchConfig(inputDirPath, outputDirPath);
         return batchConfig;
+    }
+
+    public void printHelp()
+    {
+        helpFormatter.printHelp(CMD_LINE_SYNTAX, options);
     }
 }

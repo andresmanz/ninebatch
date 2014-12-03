@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch;
+package org.cethos.tools.ninebatch.util;
 
 import org.apache.commons.io.FilenameUtils;
 
