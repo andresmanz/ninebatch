@@ -1,7 +1,7 @@
-package org.cethos.tools.ninebatch.tests;
+package org.cethos.tools.ninebatch.tests.conversion;
 
-import org.cethos.tools.ninebatch.DefaultConversionProcessor;
-import org.cethos.tools.ninebatch.tests.batch.ResourceStreamProvider;
+import org.cethos.tools.ninebatch.conversion.DefaultConversionProcessor;
+import org.cethos.tools.ninebatch.tests.conversion.batch.ResourceStreamProvider;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

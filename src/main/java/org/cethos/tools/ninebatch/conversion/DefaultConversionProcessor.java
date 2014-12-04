@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch;
+package org.cethos.tools.ninebatch.conversion;
 
 import org.apache.commons.io.IOUtils;
 import org.cethos.tools.ninebatch.conversion.ConversionParsing;

@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.tests.batch;
+package org.cethos.tools.ninebatch.tests.conversion.batch;
 
 import org.cethos.tools.ninebatch.conversion.streamprovider.StreamProvider;
 
