@@ -1,12 +1,8 @@
 package org.cethos.tools.ninebatch.conversion.processor;
 
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.IOUtils;
-import org.cethos.tools.ninebatch.conversion.BatchArgumentParser;
 import org.cethos.tools.ninebatch.conversion.ConversionParsing;
-import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
 import org.cethos.tools.ninebatch.conversion.batch.ConversionBatch;
-import org.cethos.tools.ninebatch.conversion.streamprovider.RelativeFileStreamProvider;
 import org.cethos.tools.ninebatch.conversion.streamprovider.StreamProvider;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 

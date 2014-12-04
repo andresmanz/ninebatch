@@ -3,7 +3,7 @@ package org.cethos.tools.ninebatch.tests.testutil;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class Assert
 {
