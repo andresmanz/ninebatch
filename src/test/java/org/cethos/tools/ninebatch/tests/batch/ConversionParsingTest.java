@@ -4,34 +4,41 @@ import org.apache.commons.io.IOUtils;
 import org.cethos.tools.ninebatch.conversion.ConversionParsing;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 import org.cethos.tools.ninebatch.creation.PixelRange;
+import org.cethos.tools.ninebatch.tests.testutil.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class NinePatchConfigParsingTest
+public class ConversionParsingTest
 {
     private static final String RES_PATH_NO_ENTRIES = "/ninepatchconfigs/ninepatches.noentries.json";
     private static final String RES_PATH_TWO_ENTRIES = "/ninepatchconfigs/ninepatches.twoentries.json";
 
     @Test
-    public void testGetImageConfigsFromJson_jsonWithoutEntries_shouldReturnListWithoutEntries() throws IOException
+    public void testConstructorIsPrivate() throws InvocationTargetException,
+            NoSuchMethodException, InstantiationException, IllegalAccessException
+    {
+        Assert.assertConstructorIsPrivate(ConversionParsing.class);
+    }
+
+    @Test
+    public void testParse_jsonWithoutEntries_shouldReturnListWithoutEntries() throws IOException
     {
         final String json = getJsonFromResource(RES_PATH_NO_ENTRIES);
-        final Map<String, NinePatchConfig> ninePatchConfigs =
-                ConversionParsing.parse(json);
+        final Map<String, NinePatchConfig> ninePatchConfigs = ConversionParsing.parse(json);
         assertEquals(0, ninePatchConfigs.size());
     }
 
     @Test
-    public void testGetImageConfigsFromJson_jsonWithTwoEntries_shouldReturnListWithTwoEntries() throws IOException
+    public void testParse_jsonWithTwoEntries_shouldReturnListWithTwoEntries() throws IOException
     {
         final String json = getJsonFromResource(RES_PATH_TWO_ENTRIES);
-        final Map<String, NinePatchConfig> ninePatchConfigs =
-                ConversionParsing.parse(json);
+        final Map<String, NinePatchConfig> ninePatchConfigs = ConversionParsing.parse(json);
 
         final NinePatchConfig config1 = new NinePatchConfig();
         config1.xScalingRange.set(16, 48);
@@ -57,7 +64,7 @@ public class NinePatchConfigParsingTest
         return json;
     }
 
-    private void assertNinePatchConfigsAreEqual(final NinePatchConfig firstConfig,
+    private static void assertNinePatchConfigsAreEqual(final NinePatchConfig firstConfig,
                                                 final NinePatchConfig secondConfig)
     {
         assertPixelRangesAreEqual(firstConfig.xScalingRange, secondConfig.xScalingRange);
@@ -66,7 +73,7 @@ public class NinePatchConfigParsingTest
         assertPixelRangesAreEqual(firstConfig.yPaddingRange, secondConfig.yPaddingRange);
     }
 
-    private void assertPixelRangesAreEqual(final PixelRange firstRange,
+    private static void assertPixelRangesAreEqual(final PixelRange firstRange,
                                            final PixelRange secondRange)
     {
         assertEquals(firstRange.getBegin(), secondRange.getBegin());

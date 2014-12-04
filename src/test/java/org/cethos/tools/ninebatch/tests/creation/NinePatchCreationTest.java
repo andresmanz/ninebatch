@@ -2,10 +2,12 @@ package org.cethos.tools.ninebatch.tests.creation;
 
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 import org.cethos.tools.ninebatch.creation.NinePatchCreation;
+import org.cethos.tools.ninebatch.tests.testutil.Assert;
 import org.junit.Test;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.imageio.ImageIO;
 
@@ -13,6 +15,13 @@ import static org.junit.Assert.assertTrue;
 
 public class NinePatchCreationTest
 {
+    @Test
+    public void testConstructorIsPrivate() throws InvocationTargetException,
+            NoSuchMethodException, InstantiationException, IllegalAccessException
+    {
+        Assert.assertConstructorIsPrivate(NinePatchCreation.class);
+    }
+
     @Test
     public void testCreateNinePatchFrom_withTestImage() throws IOException
     {
