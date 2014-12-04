@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import javax.imageio.ImageIO;
 
@@ -16,8 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class NinePatchCreationTest
 {
     @Test
-    public void testConstructorIsPrivate() throws InvocationTargetException,
-            NoSuchMethodException, InstantiationException, IllegalAccessException
+    public void testConstructorIsPrivate() throws Exception
     {
         Assert.assertConstructorIsPrivate(NinePatchCreation.class);
     }

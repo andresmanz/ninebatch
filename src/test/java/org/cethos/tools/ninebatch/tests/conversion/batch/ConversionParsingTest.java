@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -20,8 +19,7 @@ public class ConversionParsingTest
     private static final String RES_PATH_TWO_ENTRIES = "/ninepatchconfigs/ninepatches.twoentries.json";
 
     @Test
-    public void testConstructorIsPrivate() throws InvocationTargetException,
-            NoSuchMethodException, InstantiationException, IllegalAccessException
+    public void testConstructorIsPrivate() throws Exception
     {
         Assert.assertConstructorIsPrivate(ConversionParsing.class);
     }

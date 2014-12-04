@@ -4,15 +4,12 @@ import org.cethos.tools.ninebatch.tests.testutil.Assert;
 import org.cethos.tools.ninebatch.util.NinePatchUtil;
 import org.junit.Test;
 
-import java.lang.reflect.InvocationTargetException;
-
 import static org.junit.Assert.assertEquals;
 
 public class NinePatchUtilTest
 {
     @Test
-    public void testConstructorIsPrivate() throws InvocationTargetException,
-            NoSuchMethodException, InstantiationException, IllegalAccessException
+    public void testConstructorIsPrivate() throws Exception
     {
         Assert.assertConstructorIsPrivate(NinePatchUtil.class);
     }

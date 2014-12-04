@@ -1,7 +1,6 @@
 package org.cethos.tools.ninebatch.tests.testutil;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 import static org.junit.Assert.*;
@@ -12,9 +11,7 @@ public class Assert
     {
     }
 
-    public static <T> void assertConstructorIsPrivate(final Class<T> classToTest)
-            throws IllegalAccessException, InvocationTargetException,
-                   InstantiationException, NoSuchMethodException
+    public static <T> void assertConstructorIsPrivate(final Class<T> classToTest) throws Exception
     {
         Constructor<T> constructor = classToTest.getDeclaredConstructor();
         assertTrue(Modifier.isPrivate(constructor.getModifiers()));
