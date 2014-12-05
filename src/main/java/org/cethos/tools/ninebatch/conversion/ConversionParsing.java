@@ -42,18 +42,25 @@ public class ConversionParsing
 
     private static NinePatchConfig getNinePatchConfigFrom(final JsonValue ninePatchValue)
     {
-        final NinePatchConfig ninePatchConfig = new NinePatchConfig();
-        ninePatchConfig.getXScalingRange().set(getPixelRangeByKeyFrom("xScalingRange", ninePatchValue));
-        ninePatchConfig.getYScalingRange().set(getPixelRangeByKeyFrom("yScalingRange", ninePatchValue));
-        ninePatchConfig.getXPaddingRange().set(getPixelRangeByKeyFrom("xPaddingRange", ninePatchValue));
-        ninePatchConfig.getYPaddingRange().set(getPixelRangeByKeyFrom("yPaddingRange", ninePatchValue));
-        return ninePatchConfig;
+        final NinePatchConfig config = new NinePatchConfig();
+
+        setPixelRangeByKeyIfSet(config.getXScalingRange(), "xScalingRange", ninePatchValue);
+        setPixelRangeByKeyIfSet(config.getYScalingRange(), "yScalingRange", ninePatchValue);
+        setPixelRangeByKeyIfSet(config.getXPaddingRange(), "xPaddingRange", ninePatchValue);
+        setPixelRangeByKeyIfSet(config.getYPaddingRange(), "yPaddingRange", ninePatchValue);
+
+        return config;
     }
 
-    private static PixelRange getPixelRangeByKeyFrom(final String key, final JsonValue ninePatchValue)
+    private static void setPixelRangeByKeyIfSet(final PixelRange pixelRange, final String key,
+                                                final JsonValue ninePatchValue)
     {
-        final String rangeString = ninePatchValue.getString(key, "0-0");
-        return parsePixelRange(rangeString);
+        if(ninePatchValue.has(key))
+        {
+            final String rangeString = ninePatchValue.getString(key);
+            final PixelRange parsedPixelRange = parsePixelRange(rangeString);
+            pixelRange.set(parsedPixelRange);
+        }
     }
 
     private static PixelRange parsePixelRange(final String pixelRangeString)

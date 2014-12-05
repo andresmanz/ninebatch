@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.tests.conversion.batch;
+package org.cethos.tools.ninebatch.tests.conversion;
 
 import org.apache.commons.io.IOUtils;
 import org.cethos.tools.ninebatch.conversion.ConversionParsing;
@@ -36,7 +36,7 @@ public class ConversionParsingTest
     public void testParse_jsonWithTwoEntries_shouldReturnListWithTwoEntries() throws IOException
     {
         final String json = getJsonFromResource(RES_PATH_TWO_ENTRIES);
-        final Map<String, NinePatchConfig> ninePatchConfigs = ConversionParsing.parse(json);
+        final Map<String, NinePatchConfig> conversions = ConversionParsing.parse(json);
 
         final NinePatchConfig config1 = new NinePatchConfig();
         config1.getXScalingRange().set(16, 48);
@@ -47,12 +47,10 @@ public class ConversionParsingTest
         final NinePatchConfig config2 = new NinePatchConfig();
         config2.getXScalingRange().set(14, 50);
         config2.getYScalingRange().set(14, 50);
-        config2.getXPaddingRange().set(16, 48);
-        config2.getYPaddingRange().set(16, 48);
 
-        assertEquals(2, ninePatchConfigs.size());
-        assertNinePatchConfigsAreEqual(config1, ninePatchConfigs.get("testimg1.png"));
-        assertNinePatchConfigsAreEqual(config2, ninePatchConfigs.get("testimg2.png"));
+        assertEquals(2, conversions.size());
+        assertNinePatchConfigsEqual(config1, conversions.get("testimg1.png"));
+        assertNinePatchConfigsEqual(config2, conversions.get("testimg2.png"));
     }
 
     private String getJsonFromResource(final String resourcePath) throws IOException
@@ -62,19 +60,20 @@ public class ConversionParsingTest
         return json;
     }
 
-    private static void assertNinePatchConfigsAreEqual(final NinePatchConfig firstConfig,
-                                                final NinePatchConfig secondConfig)
+    private static void assertNinePatchConfigsEqual(final NinePatchConfig expectedConfig,
+                                                    final NinePatchConfig actualConfig)
     {
-        assertPixelRangesAreEqual(firstConfig.getXScalingRange(), secondConfig.getXScalingRange());
-        assertPixelRangesAreEqual(firstConfig.getYScalingRange(), secondConfig.getYScalingRange());
-        assertPixelRangesAreEqual(firstConfig.getXPaddingRange(), secondConfig.getXPaddingRange());
-        assertPixelRangesAreEqual(firstConfig.getYPaddingRange(), secondConfig.getYPaddingRange());
+        assertPixelRangesEqual(expectedConfig.getXScalingRange(), actualConfig.getXScalingRange());
+        assertPixelRangesEqual(expectedConfig.getYScalingRange(), actualConfig.getYScalingRange());
+        assertPixelRangesEqual(expectedConfig.getXPaddingRange(), actualConfig.getXPaddingRange());
+        assertPixelRangesEqual(expectedConfig.getYPaddingRange(), actualConfig.getYPaddingRange());
     }
 
-    private static void assertPixelRangesAreEqual(final PixelRange firstRange,
-                                           final PixelRange secondRange)
+    private static void assertPixelRangesEqual(final PixelRange expectedRange,
+                                               final PixelRange actualRange)
     {
-        assertEquals(firstRange.getBegin(), secondRange.getBegin());
-        assertEquals(firstRange.getEnd(), secondRange.getEnd());
+        assertEquals(expectedRange.isSet(), actualRange.isSet());
+        assertEquals(expectedRange.getBegin(), actualRange.getBegin());
+        assertEquals(expectedRange.getEnd(), actualRange.getEnd());
     }
 }

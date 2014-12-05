@@ -46,16 +46,13 @@ public class NinePatchCreationTest
 
     private static void assertImagesEqual(final RenderedImage expected, final RenderedImage actual)
     {
-        DataBuffer dbActual = actual.getData().getDataBuffer();
-        DataBuffer dbExpected = expected.getData().getDataBuffer();
+        DataBufferByte expectedByteBuffer = (DataBufferByte)expected.getData().getDataBuffer();
+        DataBufferByte actualByteBuffer = (DataBufferByte)actual.getData().getDataBuffer();
 
-        DataBufferByte actualDBAsDBInt = (DataBufferByte)dbActual;
-        DataBufferByte expectedDBAsDBInt = (DataBufferByte)dbExpected;
-
-        for(int bank = 0; bank < actualDBAsDBInt.getNumBanks(); ++bank)
+        for(int bank = 0; bank < actualByteBuffer.getNumBanks(); ++bank)
         {
-            byte[] actualBytes = actualDBAsDBInt.getData(bank);
-            byte[] expectedBytes = expectedDBAsDBInt.getData(bank);
+            byte[] actualBytes = actualByteBuffer.getData(bank);
+            byte[] expectedBytes = expectedByteBuffer.getData(bank);
             assertTrue(Arrays.equals(actualBytes, expectedBytes));
         }
     }

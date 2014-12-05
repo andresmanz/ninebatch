@@ -9,8 +9,6 @@
         "testimg2.png": {
             "xScalingRange": "14-50",
             "yScalingRange": "14-50",
-            "xPaddingRange": "16-48",
-            "yPaddingRange": "16-48",
         }
     }
 }
