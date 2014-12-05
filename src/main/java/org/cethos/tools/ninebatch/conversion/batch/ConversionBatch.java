@@ -35,7 +35,6 @@ public class ConversionBatch
         catch(final IOException e)
         {
             System.err.println("Could not process image: " + filePath);
-            System.err.println(e.getMessage());
         }
     }
 

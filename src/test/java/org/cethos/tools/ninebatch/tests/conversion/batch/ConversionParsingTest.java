@@ -39,16 +39,16 @@ public class ConversionParsingTest
         final Map<String, NinePatchConfig> ninePatchConfigs = ConversionParsing.parse(json);
 
         final NinePatchConfig config1 = new NinePatchConfig();
-        config1.xScalingRange.set(16, 48);
-        config1.yScalingRange.set(16, 48);
-        config1.xPaddingRange.set(18, 46);
-        config1.yPaddingRange.set(18, 46);
+        config1.getXScalingRange().set(16, 48);
+        config1.getYScalingRange().set(16, 48);
+        config1.getXPaddingRange().set(18, 46);
+        config1.getYPaddingRange().set(18, 46);
 
         final NinePatchConfig config2 = new NinePatchConfig();
-        config2.xScalingRange.set(14, 50);
-        config2.yScalingRange.set(14, 50);
-        config2.xPaddingRange.set(16, 48);
-        config2.yPaddingRange.set(16, 48);
+        config2.getXScalingRange().set(14, 50);
+        config2.getYScalingRange().set(14, 50);
+        config2.getXPaddingRange().set(16, 48);
+        config2.getYPaddingRange().set(16, 48);
 
         assertEquals(2, ninePatchConfigs.size());
         assertNinePatchConfigsAreEqual(config1, ninePatchConfigs.get("testimg1.png"));
@@ -65,10 +65,10 @@ public class ConversionParsingTest
     private static void assertNinePatchConfigsAreEqual(final NinePatchConfig firstConfig,
                                                 final NinePatchConfig secondConfig)
     {
-        assertPixelRangesAreEqual(firstConfig.xScalingRange, secondConfig.xScalingRange);
-        assertPixelRangesAreEqual(firstConfig.yScalingRange, secondConfig.yScalingRange);
-        assertPixelRangesAreEqual(firstConfig.xPaddingRange, secondConfig.xPaddingRange);
-        assertPixelRangesAreEqual(firstConfig.yPaddingRange, secondConfig.yPaddingRange);
+        assertPixelRangesAreEqual(firstConfig.getXScalingRange(), secondConfig.getXScalingRange());
+        assertPixelRangesAreEqual(firstConfig.getYScalingRange(), secondConfig.getYScalingRange());
+        assertPixelRangesAreEqual(firstConfig.getXPaddingRange(), secondConfig.getXPaddingRange());
+        assertPixelRangesAreEqual(firstConfig.getYPaddingRange(), secondConfig.getYPaddingRange());
     }
 
     private static void assertPixelRangesAreEqual(final PixelRange firstRange,

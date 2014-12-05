@@ -27,8 +27,8 @@ public class NinePatchCreationTest
         final BufferedImage loadedPatch = loadImageResource("/images/testimage.9.png");
 
         final NinePatchConfig ninePatchConfig = new NinePatchConfig();
-        ninePatchConfig.xScalingRange.set(8, 57);
-        ninePatchConfig.yScalingRange.set(8, 57);
+        ninePatchConfig.getXScalingRange().set(8, 57);
+        ninePatchConfig.getYScalingRange().set(8, 57);
 
         final BufferedImage resultPatch = NinePatchCreation.createFrom(inputImage, ninePatchConfig);
         assertImagesEqual(loadedPatch, resultPatch);

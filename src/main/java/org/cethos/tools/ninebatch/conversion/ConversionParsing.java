@@ -25,8 +25,7 @@ public class ConversionParsing
     {
         final JsonReader jsonReader = new JsonReader();
         final JsonValue root = jsonReader.parse(jsonConfig);
-        final JsonValue conversionsValue = root.get("ninePatches");
-        return conversionsValue;
+        return root.get("ninePatches");
     }
 
     private static Map<String, NinePatchConfig> getConversionsFrom(final JsonValue conversionsValue)
@@ -44,10 +43,10 @@ public class ConversionParsing
     private static NinePatchConfig getNinePatchConfigFrom(final JsonValue ninePatchValue)
     {
         final NinePatchConfig ninePatchConfig = new NinePatchConfig();
-        ninePatchConfig.xScalingRange.set(getPixelRangeByKeyFrom("xScalingRange", ninePatchValue));
-        ninePatchConfig.yScalingRange.set(getPixelRangeByKeyFrom("yScalingRange", ninePatchValue));
-        ninePatchConfig.xPaddingRange.set(getPixelRangeByKeyFrom("xPaddingRange", ninePatchValue));
-        ninePatchConfig.yPaddingRange.set(getPixelRangeByKeyFrom("yPaddingRange", ninePatchValue));
+        ninePatchConfig.getXScalingRange().set(getPixelRangeByKeyFrom("xScalingRange", ninePatchValue));
+        ninePatchConfig.getYScalingRange().set(getPixelRangeByKeyFrom("yScalingRange", ninePatchValue));
+        ninePatchConfig.getXPaddingRange().set(getPixelRangeByKeyFrom("xPaddingRange", ninePatchValue));
+        ninePatchConfig.getYPaddingRange().set(getPixelRangeByKeyFrom("yPaddingRange", ninePatchValue));
         return ninePatchConfig;
     }
 

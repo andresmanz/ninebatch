@@ -2,10 +2,10 @@ package org.cethos.tools.ninebatch.creation;
 
 public class NinePatchConfig
 {
-    public final PixelRange xScalingRange;
-    public final PixelRange yScalingRange;
-    public final PixelRange xPaddingRange;
-    public final PixelRange yPaddingRange;
+    private final PixelRange xScalingRange;
+    private final PixelRange yScalingRange;
+    private final PixelRange xPaddingRange;
+    private final PixelRange yPaddingRange;
 
     public NinePatchConfig()
     {
@@ -13,5 +13,25 @@ public class NinePatchConfig
         this.yScalingRange = new PixelRange();
         this.xPaddingRange = new PixelRange();
         this.yPaddingRange = new PixelRange();
+    }
+
+    public PixelRange getXScalingRange()
+    {
+        return xScalingRange;
+    }
+
+    public PixelRange getYScalingRange()
+    {
+        return yScalingRange;
+    }
+
+    public PixelRange getXPaddingRange()
+    {
+        return xPaddingRange;
+    }
+
+    public PixelRange getYPaddingRange()
+    {
+        return yPaddingRange;
     }
 }

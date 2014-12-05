@@ -68,7 +68,7 @@ public class BatchArgumentParser
 
     private String getInputDirPathFrom(final CommandLine commandLine) throws ParseException
     {
-        if(commandLine.getArgList().size() > 0)
+        if(!commandLine.getArgList().isEmpty())
         {
             return (String)commandLine.getArgList().get(0);
         }

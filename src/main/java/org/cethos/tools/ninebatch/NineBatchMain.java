@@ -5,6 +5,10 @@ import org.cethos.tools.ninebatch.conversion.processor.ConversionProcessorFactor
 
 public class NineBatchMain
 {
+    private NineBatchMain()
+    {
+    }
+
     public static void main(final String[] args)
     {
         try

@@ -31,8 +31,7 @@ public class BatchConversionProcessor implements ConversionProcessor
     private Map<String, NinePatchConfig> loadConversions() throws IOException
     {
         final String conversionJson = loadConversionJson();
-        final Map<String, NinePatchConfig> conversions = ConversionParsing.parse(conversionJson);
-        return conversions;
+        return ConversionParsing.parse(conversionJson);
     }
 
     private String loadConversionJson() throws IOException
