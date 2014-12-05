@@ -16,7 +16,14 @@ public class ConversionProcessorFactory
     {
         final BatchArgumentParser argumentParser = new BatchArgumentParser();
         final BatchConfig batchConfig = argumentParser.createConfigFrom(args);
-        final StreamProvider streamProvider = new RelativeFileStreamProvider(batchConfig);
+        final StreamProvider streamProvider = createStreamProviderFrom(batchConfig);
         return new BatchConversionProcessor(streamProvider);
+    }
+
+    private static StreamProvider createStreamProviderFrom(final BatchConfig batchConfig)
+    {
+        final String inputDir = batchConfig.getInputDirPath();
+        final String outputDir = batchConfig.getOutputDirPath();
+        return new RelativeFileStreamProvider(inputDir, outputDir);
     }
 }
