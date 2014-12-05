@@ -6,7 +6,11 @@ import org.cethos.tools.ninebatch.tests.testutil.Assert;
 import org.junit.Test;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.RenderedImage;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -30,7 +34,7 @@ public class NinePatchCreationTest
         ninePatchConfig.getXScalingRange().set(8, 57);
         ninePatchConfig.getYScalingRange().set(8, 57);
 
-        final BufferedImage resultPatch = NinePatchCreation.createFrom(inputImage, ninePatchConfig);
+        final RenderedImage resultPatch = NinePatchCreation.createFrom(inputImage, ninePatchConfig);
         assertImagesEqual(loadedPatch, resultPatch);
     }
 
@@ -40,30 +44,19 @@ public class NinePatchCreationTest
         return image;
     }
 
-    private static void assertImagesEqual(final BufferedImage expected, final BufferedImage actual)
+    private static void assertImagesEqual(final RenderedImage expected, final RenderedImage actual)
     {
-        final int actualWidth = actual.getWidth();
-        final int actualHeight = actual.getHeight();
-        boolean imagesEqual = true;
+        DataBuffer dbActual = actual.getData().getDataBuffer();
+        DataBuffer dbExpected = expected.getData().getDataBuffer();
 
-        if(expected.getWidth() == actualWidth && expected.getHeight() == actualHeight)
-        {
-            for(int x = 0; imagesEqual == true && x < actualWidth; ++x)
-            {
-                for(int y = 0; imagesEqual == true && y < actualHeight; ++y)
-                {
-                    if(expected.getRGB(x, y) != actual.getRGB(x, y))
-                    {
-                        imagesEqual = false;
-                    }
-                }
-            }
-        }
-        else
-        {
-            imagesEqual = false;
-        }
+        DataBufferByte actualDBAsDBInt = (DataBufferByte)dbActual;
+        DataBufferByte expectedDBAsDBInt = (DataBufferByte)dbExpected;
 
-        assertTrue("ninepatches should equal", imagesEqual);
+        for(int bank = 0; bank < actualDBAsDBInt.getNumBanks(); ++bank)
+        {
+            byte[] actualBytes = actualDBAsDBInt.getData(bank);
+            byte[] expectedBytes = expectedDBAsDBInt.getData(bank);
+            assertTrue(Arrays.equals(actualBytes, expectedBytes));
+        }
     }
 }

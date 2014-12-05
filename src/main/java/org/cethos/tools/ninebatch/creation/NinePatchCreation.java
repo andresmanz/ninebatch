@@ -3,19 +3,18 @@ package org.cethos.tools.ninebatch.creation;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.awt.image.RenderedImage;
 
 public class NinePatchCreation
 {
-    private static final int NINE_PATCH_FORMAT = BufferedImage.TYPE_INT_ARGB;
+    private static final int NINE_PATCH_FORMAT = BufferedImage.TYPE_4BYTE_ABGR;
     private static final int PIXEL_EXTENSION = 2;
 
     private NinePatchCreation()
     {
     }
 
-    public static BufferedImage createFrom(final BufferedImage inputImage,
-                                           final NinePatchConfig config) throws IOException
+    public static RenderedImage createFrom(final BufferedImage inputImage, final NinePatchConfig config)
     {
         final BufferedImage ninePatch = createNinePatchWithLineExtensionFor(inputImage);
         Graphics2D graphics = ninePatch.createGraphics();

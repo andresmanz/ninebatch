@@ -1,10 +1,15 @@
 package org.cethos.tools.ninebatch;
 
+import org.cethos.tools.ninebatch.conversion.ConversionFailureException;
 import org.cethos.tools.ninebatch.conversion.processor.ConversionProcessor;
 import org.cethos.tools.ninebatch.conversion.processor.ConversionProcessorFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NineBatchMain
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NineBatchMain.class);
+
     private NineBatchMain()
     {
     }
@@ -17,9 +22,9 @@ public class NineBatchMain
             final ConversionProcessor processor = factory.createFrom(args);
             processor.loadAndProcessConversions();
         }
-        catch(final Exception e)
+        catch(final ConversionFailureException exception)
         {
-            System.err.println(e.getMessage());
+            LOGGER.error("Error processing conversions", exception);
         }
     }
 }

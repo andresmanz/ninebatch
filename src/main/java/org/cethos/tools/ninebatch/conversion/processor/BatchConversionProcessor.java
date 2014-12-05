@@ -1,6 +1,7 @@
 package org.cethos.tools.ninebatch.conversion.processor;
 
 import org.apache.commons.io.IOUtils;
+import org.cethos.tools.ninebatch.conversion.ConversionFailureException;
 import org.cethos.tools.ninebatch.conversion.ConversionParsing;
 import org.cethos.tools.ninebatch.conversion.batch.ConversionBatch;
 import org.cethos.tools.ninebatch.conversion.streamprovider.StreamProvider;
@@ -21,24 +22,31 @@ public class BatchConversionProcessor implements ConversionProcessor
         this.streamProvider = streamProvider;
     }
 
-    public void loadAndProcessConversions() throws IOException
+    public void loadAndProcessConversions()
     {
         final Map<String, NinePatchConfig> conversions = loadConversions();
         final ConversionBatch conversionBatch = new ConversionBatch(streamProvider);
         conversionBatch.process(conversions);
     }
 
-    private Map<String, NinePatchConfig> loadConversions() throws IOException
+    private Map<String, NinePatchConfig> loadConversions()
     {
         final String conversionJson = loadConversionJson();
         return ConversionParsing.parse(conversionJson);
     }
 
-    private String loadConversionJson() throws IOException
+    private String loadConversionJson()
     {
-        final InputStream inputStream = streamProvider.getInputStreamFor(CONVERSION_CONFIG_FILE_NAME);
-        final String json = IOUtils.toString(inputStream);
-        inputStream.close();
-        return json;
+        try
+        {
+            final InputStream inputStream = streamProvider.getInputStreamFor(CONVERSION_CONFIG_FILE_NAME);
+            final String json = IOUtils.toString(inputStream);
+            inputStream.close();
+            return json;
+        }
+        catch(final IOException exception)
+        {
+            throw new ConversionFailureException(exception);
+        }
     }
 }

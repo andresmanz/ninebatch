@@ -50,7 +50,7 @@ public class BatchArgumentParser
         return option;
     }
 
-    public BatchConfig createConfigFrom(final String[] args) throws ParseException
+    public BatchConfig createConfigFrom(final String[] args)
     {
         try
         {
@@ -62,7 +62,7 @@ public class BatchArgumentParser
         catch(final ParseException exception)
         {
             printHelp();
-            throw exception;
+            throw new ConversionFailureException(exception);
         }
     }
 

@@ -1,6 +1,6 @@
 package org.cethos.tools.ninebatch.tests.conversion.processor;
 
-import org.apache.commons.cli.ParseException;
+import org.cethos.tools.ninebatch.conversion.ConversionFailureException;
 import org.cethos.tools.ninebatch.conversion.processor.BatchConversionProcessor;
 import org.cethos.tools.ninebatch.conversion.processor.ConversionProcessor;
 import org.cethos.tools.ninebatch.conversion.processor.ConversionProcessorFactory;
@@ -28,14 +28,14 @@ public class ConversionProcessorFactoryTest
     @Test
     public void testCreateFrom_withoutArgs() throws Exception
     {
-        thrown.expect(ParseException.class);
+        thrown.expect(ConversionFailureException.class);
         processorFactory.createFrom(new String[0]);
     }
 
     @Test
     public void testCreateFrom_withInvalidArgs() throws Exception
     {
-        thrown.expect(ParseException.class);
+        thrown.expect(ConversionFailureException.class);
         processorFactory.createFrom(CommandLineUtil.getArgsFrom("--doesnotexist"));
     }
 

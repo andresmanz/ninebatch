@@ -28,6 +28,7 @@ allprojects {
         commonsIoVersion = '2.4'
         jsonBeansVersion = '0.7'
         jUnitVersion = '4.11'
+        logbackVersion = '1.1.2'
     }
 
     repositories {
@@ -40,6 +41,7 @@ dependencies {
     compile "commons-cli:commons-cli:$commonsCliVersion"
     compile "commons-io:commons-io:$commonsIoVersion"
     compile "com.esotericsoftware:jsonbeans:$jsonBeansVersion"
+    compile "ch.qos.logback:logback-classic:$logbackVersion"
     testCompile "junit:junit:$jUnitVersion"
 }
 

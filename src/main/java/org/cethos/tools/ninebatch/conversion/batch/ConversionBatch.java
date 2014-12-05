@@ -4,13 +4,18 @@ import org.cethos.tools.ninebatch.conversion.StreamConversionIO;
 import org.cethos.tools.ninebatch.conversion.streamprovider.StreamProvider;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 import org.cethos.tools.ninebatch.creation.NinePatchCreation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.util.Map;
 
 public class ConversionBatch
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConversionBatch.class);
+
     private final StreamConversionIO streamConversionIO;
 
     public ConversionBatch(final StreamProvider streamProvider)
@@ -32,9 +37,9 @@ public class ConversionBatch
         {
             convertAndSaveNinePatch(filePath, ninePatchConfig);
         }
-        catch(final IOException e)
+        catch(final IOException exception)
         {
-            System.err.println("Could not process image: " + filePath);
+            LOGGER.warn("Could not process image", exception);
         }
     }
 
@@ -42,7 +47,7 @@ public class ConversionBatch
             throws IOException
     {
         final BufferedImage inputImage = streamConversionIO.read(inputImageFilePath);
-        final BufferedImage ninePatch = NinePatchCreation.createFrom(inputImage, config);
+        final RenderedImage ninePatch = NinePatchCreation.createFrom(inputImage, config);
         streamConversionIO.writeNinePatchFor(ninePatch, inputImageFilePath);
     }
 }

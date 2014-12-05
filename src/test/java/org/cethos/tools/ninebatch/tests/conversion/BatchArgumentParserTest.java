@@ -1,7 +1,7 @@
 package org.cethos.tools.ninebatch.tests.conversion;
 
-import org.apache.commons.cli.ParseException;
 import org.cethos.tools.ninebatch.conversion.BatchArgumentParser;
+import org.cethos.tools.ninebatch.conversion.ConversionFailureException;
 import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
 import org.cethos.tools.ninebatch.tests.testutil.CommandLineUtil;
 import org.junit.Before;
@@ -25,16 +25,16 @@ public class BatchArgumentParserTest
     }
 
     @Test
-    public void testCreateConfigFromArguments_withEmptyArguments() throws ParseException
+    public void testCreateConfigFromArguments_withEmptyArguments()
     {
         final String[] arguments = new String[0];
-        thrown.expect(ParseException.class);
+        thrown.expect(ConversionFailureException.class);
         thrown.expectMessage("Missing required option");
         argumentHandler.createConfigFrom(arguments);
     }
 
     @Test
-    public void testCreateConfigFromArguments_withInputDirectoryOnly() throws ParseException
+    public void testCreateConfigFromArguments_withInputDirectoryOnly()
     {
         final String[] args = CommandLineUtil.getArgsFrom("testinputdirectory");
         final BatchConfig config = argumentHandler.createConfigFrom(args);
@@ -43,7 +43,7 @@ public class BatchArgumentParserTest
     }
 
     @Test
-    public void testCreateConfigFromArguments_withInputAndOutputDirectory() throws ParseException
+    public void testCreateConfigFromArguments_withInputAndOutputDirectory()
     {
         final String[] args = CommandLineUtil.getArgsFrom("-o testoutputdirectory testinputdirectory");
         final BatchConfig config = argumentHandler.createConfigFrom(args);
