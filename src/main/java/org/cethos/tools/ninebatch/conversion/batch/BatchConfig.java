@@ -4,6 +4,7 @@ public class BatchConfig
 {
     private String inputDirPath;
     private String outputDirPath;
+    private boolean isDeletingOriginalsEnabled;
 
     public BatchConfig(final String inputDirPath, final String outputDirPath)
     {
@@ -19,5 +20,15 @@ public class BatchConfig
     public String getOutputDirPath()
     {
         return outputDirPath;
+    }
+
+    public boolean isDeletingOriginalsEnabled()
+    {
+        return isDeletingOriginalsEnabled;
+    }
+
+    public void setDeletingOriginalsEnabled(final boolean isEnabled)
+    {
+        this.isDeletingOriginalsEnabled = isEnabled;
     }
 }

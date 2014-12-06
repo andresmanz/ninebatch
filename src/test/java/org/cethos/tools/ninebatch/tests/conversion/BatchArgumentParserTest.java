@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BatchArgumentParserTest
 {
@@ -25,7 +27,7 @@ public class BatchArgumentParserTest
     }
 
     @Test
-    public void testCreateConfigFromArguments_withEmptyArguments()
+    public void testCreateConfigFromArguments_emptyArguments()
     {
         final String[] arguments = new String[0];
         thrown.expect(ConversionFailureException.class);
@@ -34,20 +36,32 @@ public class BatchArgumentParserTest
     }
 
     @Test
-    public void testCreateConfigFromArguments_withInputDirectoryOnly()
+    public void testCreateConfigFromArguments_inputDirectoryOnly()
     {
         final String[] args = CommandLineUtil.getArgsFrom("testinputdirectory");
         final BatchConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testinputdirectory");
+        assertFalse(config.isDeletingOriginalsEnabled());
     }
 
     @Test
-    public void testCreateConfigFromArguments_withInputAndOutputDirectory()
+    public void testCreateConfigFromArguments_inputAndOutputDirectory()
     {
         final String[] args = CommandLineUtil.getArgsFrom("-o testoutputdirectory testinputdirectory");
         final BatchConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testoutputdirectory");
+        assertFalse(config.isDeletingOriginalsEnabled());
+    }
+
+    @Test
+    public void testCreateConfigFromArguments_inputDirectoryAndDeleteOriginals()
+    {
+        final String[] args = CommandLineUtil.getArgsFrom("-d testinputdirectory");
+        final BatchConfig config = argumentHandler.createConfigFrom(args);
+        assertEquals(config.getInputDirPath(), "testinputdirectory");
+        assertEquals(config.getOutputDirPath(), "testinputdirectory");
+        assertTrue(config.isDeletingOriginalsEnabled());
     }
 }
