@@ -2,6 +2,7 @@ package org.cethos.tools.ninebatch.tests.conversion.batch;
 
 import org.cethos.tools.ninebatch.conversion.batch.ConversionBatch;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
+import org.cethos.tools.ninebatch.tests.conversion.ResourceStreamProvider;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

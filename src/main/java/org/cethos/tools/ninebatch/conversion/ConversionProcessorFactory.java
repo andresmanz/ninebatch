@@ -1,9 +1,7 @@
-package org.cethos.tools.ninebatch.conversion.processor;
+package org.cethos.tools.ninebatch.conversion;
 
-import org.cethos.tools.ninebatch.conversion.BatchArgumentParser;
-import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
-import org.cethos.tools.ninebatch.conversion.streamprovider.RelativeFileStreamProvider;
-import org.cethos.tools.ninebatch.conversion.streamprovider.StreamProvider;
+import org.cethos.tools.ninebatch.conversion.io.RelativeFileStreamProvider;
+import org.cethos.tools.ninebatch.conversion.io.StreamProvider;
 
 public class ConversionProcessorFactory
 {
@@ -17,7 +15,10 @@ public class ConversionProcessorFactory
         final BatchArgumentParser argumentParser = new BatchArgumentParser();
         final BatchConfig batchConfig = argumentParser.createConfigFrom(args);
         final StreamProvider streamProvider = createStreamProviderFrom(batchConfig);
-        return new BatchConversionProcessor(streamProvider);
+
+        final BatchConversionProcessor processor = new BatchConversionProcessor(streamProvider);
+        processor.setDeletingImageSourcesEnabled(batchConfig.isDeletingOriginalsEnabled());
+        return processor;
     }
 
     private static StreamProvider createStreamProviderFrom(final BatchConfig batchConfig)

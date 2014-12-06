@@ -2,7 +2,7 @@ package org.cethos.tools.ninebatch.tests.conversion;
 
 import org.cethos.tools.ninebatch.conversion.BatchArgumentParser;
 import org.cethos.tools.ninebatch.conversion.ConversionFailureException;
-import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
+import org.cethos.tools.ninebatch.conversion.BatchConfig;
 import org.cethos.tools.ninebatch.tests.testutil.CommandLineUtil;
 import org.junit.Before;
 import org.junit.Rule;

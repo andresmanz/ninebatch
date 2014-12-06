@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.conversion;
+package org.cethos.tools.ninebatch.conversion.batch;
 
 import com.esotericsoftware.jsonbeans.JsonReader;
 import com.esotericsoftware.jsonbeans.JsonValue;

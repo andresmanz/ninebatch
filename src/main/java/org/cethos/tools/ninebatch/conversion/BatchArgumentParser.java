@@ -7,7 +7,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.cethos.tools.ninebatch.conversion.batch.BatchConfig;
 
 public class BatchArgumentParser
 {

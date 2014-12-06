@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.conversion.processor;
+package org.cethos.tools.ninebatch.conversion;
 
 public interface ConversionProcessor
 {

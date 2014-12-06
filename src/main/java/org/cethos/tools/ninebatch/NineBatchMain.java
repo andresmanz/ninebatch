@@ -1,8 +1,8 @@
 package org.cethos.tools.ninebatch;
 
 import org.cethos.tools.ninebatch.conversion.ConversionFailureException;
-import org.cethos.tools.ninebatch.conversion.processor.ConversionProcessor;
-import org.cethos.tools.ninebatch.conversion.processor.ConversionProcessorFactory;
+import org.cethos.tools.ninebatch.conversion.ConversionProcessor;
+import org.cethos.tools.ninebatch.conversion.ConversionProcessorFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

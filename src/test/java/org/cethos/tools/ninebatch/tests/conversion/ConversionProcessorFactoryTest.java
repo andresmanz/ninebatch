@@ -1,9 +1,9 @@
-package org.cethos.tools.ninebatch.tests.conversion.processor;
+package org.cethos.tools.ninebatch.tests.conversion;
 
 import org.cethos.tools.ninebatch.conversion.ConversionFailureException;
-import org.cethos.tools.ninebatch.conversion.processor.BatchConversionProcessor;
-import org.cethos.tools.ninebatch.conversion.processor.ConversionProcessor;
-import org.cethos.tools.ninebatch.conversion.processor.ConversionProcessorFactory;
+import org.cethos.tools.ninebatch.conversion.BatchConversionProcessor;
+import org.cethos.tools.ninebatch.conversion.ConversionProcessor;
+import org.cethos.tools.ninebatch.conversion.ConversionProcessorFactory;
 import org.cethos.tools.ninebatch.tests.testutil.CommandLineUtil;
 import org.junit.Before;
 import org.junit.Rule;

@@ -1,7 +1,7 @@
-package org.cethos.tools.ninebatch.tests.conversion;
+package org.cethos.tools.ninebatch.tests.conversion.batch;
 
 import org.apache.commons.io.IOUtils;
-import org.cethos.tools.ninebatch.conversion.ConversionParsing;
+import org.cethos.tools.ninebatch.conversion.batch.ConversionParsing;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 import org.cethos.tools.ninebatch.creation.PixelRange;
 import org.cethos.tools.ninebatch.tests.testutil.Assert;

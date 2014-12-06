@@ -1,6 +1,6 @@
-package org.cethos.tools.ninebatch.tests.conversion.batch;
+package org.cethos.tools.ninebatch.tests.conversion;
 
-import org.cethos.tools.ninebatch.conversion.streamprovider.StreamProvider;
+import org.cethos.tools.ninebatch.conversion.io.StreamProvider;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -12,6 +12,7 @@ public class ResourceStreamProvider implements StreamProvider
     private final String basePath;
     private int totalOutputStreamAccessCount;
     private int totalInputStreamAccessCount;
+    private int totalSourceDeletionCount;
 
     public ResourceStreamProvider(final String basePath)
     {
@@ -41,6 +42,12 @@ public class ResourceStreamProvider implements StreamProvider
         }
     }
 
+    @Override
+    public void deleteImageSource(String fileName)
+    {
+        ++totalSourceDeletionCount;
+    }
+
     public int getTotalOutputStreamAccessCount()
     {
         return totalOutputStreamAccessCount;
@@ -49,5 +56,10 @@ public class ResourceStreamProvider implements StreamProvider
     public int getTotalInputStreamAccessCount()
     {
         return totalInputStreamAccessCount;
+    }
+
+    public int getTotalSourceDeletionCount()
+    {
+        return totalSourceDeletionCount;
     }
 }

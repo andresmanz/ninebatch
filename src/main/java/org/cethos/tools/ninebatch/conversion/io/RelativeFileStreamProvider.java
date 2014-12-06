@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.conversion.streamprovider;
+package org.cethos.tools.ninebatch.conversion.io;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,5 +30,15 @@ public class RelativeFileStreamProvider implements StreamProvider
     {
         final File file = new File(baseInputPath, fileName);
         return new FileInputStream(file);
+    }
+
+    @Override
+    public void deleteImageSource(final String fileName)
+    {
+        final File file = new File(baseInputPath, fileName);
+        if(file.exists())
+        {
+            file.delete();
+        }
     }
 }
