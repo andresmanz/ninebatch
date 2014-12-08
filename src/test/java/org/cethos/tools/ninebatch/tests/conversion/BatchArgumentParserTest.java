@@ -43,6 +43,7 @@ public class BatchArgumentParserTest
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testinputdirectory");
         assertFalse(config.isDeletingOriginalsEnabled());
+        assertFalse(config.isQueryRequested());
     }
 
     @Test
@@ -53,6 +54,7 @@ public class BatchArgumentParserTest
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testoutputdirectory");
         assertFalse(config.isDeletingOriginalsEnabled());
+        assertFalse(config.isQueryRequested());
     }
 
     @Test
@@ -63,5 +65,17 @@ public class BatchArgumentParserTest
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testinputdirectory");
         assertTrue(config.isDeletingOriginalsEnabled());
+        assertFalse(config.isQueryRequested());
+    }
+
+    @Test
+    public void testCreateConfigFromArguments_inputDirectoryAndQueryRequested()
+    {
+        final String[] args = CommandLineUtil.getArgsFrom("-q testinputdirectory");
+        final BatchConfig config = argumentHandler.createConfigFrom(args);
+        assertEquals(config.getInputDirPath(), "testinputdirectory");
+        assertEquals(config.getOutputDirPath(), "testinputdirectory");
+        assertFalse(config.isDeletingOriginalsEnabled());
+        assertTrue(config.isQueryRequested());
     }
 }

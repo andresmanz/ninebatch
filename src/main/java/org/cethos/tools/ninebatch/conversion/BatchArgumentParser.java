@@ -13,10 +13,15 @@ public class BatchArgumentParser
     private static final String CMD_LINE_SYNTAX = "ninebatch [OPTIONS] input-directory";
     private static final String OPT_OUTPUT_DIR = "o";
     private static final String OPT_DELETE_ORIGINALS = "d";
+    private static final String OPT_QUERY_IMAGES = "q";
+
     private static final String LONG_OPT_OUTPUT_DIR = "output-directory";
     private static final String LONG_OPT_DELETE_ORIGINALS = "delete-originals";
+    private static final String LONG_OPT_QUERY_IMAGES = "query-images";
+
     private static final String DESC_OUTPUT_DIR = "ninebatch output directory";
     private static final String DESC_DELETE_ORIGINALS = "delete original images";
+    private static final String DESC_QUERY_IMAGES = "query input image list; won't convert anything";
 
     private final Options options;
     private final HelpFormatter helpFormatter;
@@ -34,6 +39,7 @@ public class BatchArgumentParser
         final Options options = new Options();
         options.addOption(createOutputDirectoryOption());
         options.addOption(createDeleteOriginalsOption());
+        options.addOption(createQueryImagesOption());
         return options;
     }
 
@@ -49,6 +55,13 @@ public class BatchArgumentParser
     {
         final Option option = new Option(OPT_DELETE_ORIGINALS, false, DESC_DELETE_ORIGINALS);
         option.setLongOpt(LONG_OPT_DELETE_ORIGINALS);
+        return option;
+    }
+
+    private static Option createQueryImagesOption()
+    {
+        final Option option = new Option(OPT_QUERY_IMAGES, false, DESC_QUERY_IMAGES);
+        option.setLongOpt(LONG_OPT_QUERY_IMAGES);
         return option;
     }
 
@@ -72,9 +85,11 @@ public class BatchArgumentParser
         final String inputDirPath = getInputDirPathFrom(commandLine);
         final String outputDirPath = commandLine.getOptionValue(OPT_OUTPUT_DIR, inputDirPath);
         final boolean isDeletingOriginalsEnabled = commandLine.hasOption(OPT_DELETE_ORIGINALS);
+        final boolean isQueryRequested = commandLine.hasOption(OPT_QUERY_IMAGES);
 
         final BatchConfig batchConfig = new BatchConfig(inputDirPath, outputDirPath);
         batchConfig.setDeletingOriginalsEnabled(isDeletingOriginalsEnabled);
+        batchConfig.setQueryRequested(isQueryRequested);
         return batchConfig;
     }
 

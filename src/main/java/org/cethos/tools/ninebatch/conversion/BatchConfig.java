@@ -5,6 +5,7 @@ public class BatchConfig
     private String inputDirPath;
     private String outputDirPath;
     private boolean isDeletingOriginalsEnabled;
+    private boolean isQueryRequested;
 
     public BatchConfig(final String inputDirPath, final String outputDirPath)
     {
@@ -30,5 +31,15 @@ public class BatchConfig
     public void setDeletingOriginalsEnabled(final boolean isEnabled)
     {
         this.isDeletingOriginalsEnabled = isEnabled;
+    }
+
+    public boolean isQueryRequested()
+    {
+        return isQueryRequested;
+    }
+
+    public void setQueryRequested(final boolean isQueryRequested)
+    {
+        this.isQueryRequested = isQueryRequested;
     }
 }
