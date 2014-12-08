@@ -1,13 +1,13 @@
-package org.cethos.tools.ninebatch.conversion;
+package org.cethos.tools.ninebatch.tasks;
 
-public class BatchConfig
+public class RunConfig
 {
     private String inputDirPath;
     private String outputDirPath;
     private boolean isDeletingOriginalsEnabled;
     private boolean isQueryRequested;
 
-    public BatchConfig(final String inputDirPath, final String outputDirPath)
+    public RunConfig(final String inputDirPath, final String outputDirPath)
     {
         this.inputDirPath = inputDirPath;
         this.outputDirPath = outputDirPath;

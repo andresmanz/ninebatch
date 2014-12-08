@@ -1,8 +1,8 @@
-package org.cethos.tools.ninebatch.tests.conversion;
+package org.cethos.tools.ninebatch.tests.tasks;
 
-import org.cethos.tools.ninebatch.conversion.BatchArgumentParser;
-import org.cethos.tools.ninebatch.conversion.ConversionFailureException;
-import org.cethos.tools.ninebatch.conversion.BatchConfig;
+import org.cethos.tools.ninebatch.tasks.ArgumentParser;
+import org.cethos.tools.ninebatch.tasks.ConversionFailureException;
+import org.cethos.tools.ninebatch.tasks.RunConfig;
 import org.cethos.tools.ninebatch.tests.testutil.CommandLineUtil;
 import org.junit.Before;
 import org.junit.Rule;
@@ -13,9 +13,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class BatchArgumentParserTest
+public class ArgumentParserTest
 {
-    private BatchArgumentParser argumentHandler;
+    private ArgumentParser argumentHandler;
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
@@ -23,7 +23,7 @@ public class BatchArgumentParserTest
     @Before
     public void beforeTest()
     {
-        this.argumentHandler = new BatchArgumentParser();
+        this.argumentHandler = new ArgumentParser();
     }
 
     @Test
@@ -39,7 +39,7 @@ public class BatchArgumentParserTest
     public void testCreateConfigFromArguments_inputDirectoryOnly()
     {
         final String[] args = CommandLineUtil.getArgsFrom("testinputdirectory");
-        final BatchConfig config = argumentHandler.createConfigFrom(args);
+        final RunConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testinputdirectory");
         assertFalse(config.isDeletingOriginalsEnabled());
@@ -50,7 +50,7 @@ public class BatchArgumentParserTest
     public void testCreateConfigFromArguments_inputAndOutputDirectory()
     {
         final String[] args = CommandLineUtil.getArgsFrom("-o testoutputdirectory testinputdirectory");
-        final BatchConfig config = argumentHandler.createConfigFrom(args);
+        final RunConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testoutputdirectory");
         assertFalse(config.isDeletingOriginalsEnabled());
@@ -61,7 +61,7 @@ public class BatchArgumentParserTest
     public void testCreateConfigFromArguments_inputDirectoryAndDeleteOriginals()
     {
         final String[] args = CommandLineUtil.getArgsFrom("-d testinputdirectory");
-        final BatchConfig config = argumentHandler.createConfigFrom(args);
+        final RunConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testinputdirectory");
         assertTrue(config.isDeletingOriginalsEnabled());
@@ -72,7 +72,7 @@ public class BatchArgumentParserTest
     public void testCreateConfigFromArguments_inputDirectoryAndQueryRequested()
     {
         final String[] args = CommandLineUtil.getArgsFrom("-q testinputdirectory");
-        final BatchConfig config = argumentHandler.createConfigFrom(args);
+        final RunConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testinputdirectory");
         assertFalse(config.isDeletingOriginalsEnabled());

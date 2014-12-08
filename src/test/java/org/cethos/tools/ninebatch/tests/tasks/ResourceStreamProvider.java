@@ -1,6 +1,6 @@
-package org.cethos.tools.ninebatch.tests.conversion;
+package org.cethos.tools.ninebatch.tests.tasks;
 
-import org.cethos.tools.ninebatch.conversion.io.StreamProvider;
+import org.cethos.tools.ninebatch.tasks.io.StreamProvider;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;

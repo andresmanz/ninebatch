@@ -1,8 +1,8 @@
 package org.cethos.tools.ninebatch;
 
-import org.cethos.tools.ninebatch.conversion.ConversionFailureException;
-import org.cethos.tools.ninebatch.conversion.ConversionProcessor;
-import org.cethos.tools.ninebatch.conversion.ConversionProcessorFactory;
+import org.cethos.tools.ninebatch.tasks.ConversionFailureException;
+import org.cethos.tools.ninebatch.tasks.Task;
+import org.cethos.tools.ninebatch.tasks.TaskFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +18,9 @@ public class NineBatchMain
     {
         try
         {
-            final ConversionProcessorFactory factory = new ConversionProcessorFactory();
-            final ConversionProcessor processor = factory.createFrom(args);
-            processor.loadAndProcessConversions();
+            final TaskFactory factory = new TaskFactory();
+            final Task processor = factory.createFrom(args);
+            processor.process();
         }
         catch(final ConversionFailureException exception)
         {

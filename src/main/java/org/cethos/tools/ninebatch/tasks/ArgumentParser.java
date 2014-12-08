@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.conversion;
+package org.cethos.tools.ninebatch.tasks;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -8,7 +8,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-public class BatchArgumentParser
+public class ArgumentParser
 {
     private static final String CMD_LINE_SYNTAX = "ninebatch [OPTIONS] input-directory";
     private static final String OPT_OUTPUT_DIR = "o";
@@ -27,7 +27,7 @@ public class BatchArgumentParser
     private final HelpFormatter helpFormatter;
     private final CommandLineParser commandLineParser;
 
-    public BatchArgumentParser()
+    public ArgumentParser()
     {
         this.options = createCommandLineOptions();
         this.helpFormatter = new HelpFormatter();
@@ -65,7 +65,7 @@ public class BatchArgumentParser
         return option;
     }
 
-    public BatchConfig createConfigFrom(final String[] args)
+    public RunConfig createConfigFrom(final String[] args)
     {
         try
         {
@@ -78,7 +78,7 @@ public class BatchArgumentParser
         }
     }
 
-    private BatchConfig tryCreatingBatchConfigFrom(final String[] args) throws ParseException
+    private RunConfig tryCreatingBatchConfigFrom(final String[] args) throws ParseException
     {
         final CommandLine commandLine = commandLineParser.parse(options, args);
 
@@ -87,10 +87,10 @@ public class BatchArgumentParser
         final boolean isDeletingOriginalsEnabled = commandLine.hasOption(OPT_DELETE_ORIGINALS);
         final boolean isQueryRequested = commandLine.hasOption(OPT_QUERY_IMAGES);
 
-        final BatchConfig batchConfig = new BatchConfig(inputDirPath, outputDirPath);
-        batchConfig.setDeletingOriginalsEnabled(isDeletingOriginalsEnabled);
-        batchConfig.setQueryRequested(isQueryRequested);
-        return batchConfig;
+        final RunConfig runConfig = new RunConfig(inputDirPath, outputDirPath);
+        runConfig.setDeletingOriginalsEnabled(isDeletingOriginalsEnabled);
+        runConfig.setQueryRequested(isQueryRequested);
+        return runConfig;
     }
 
     private String getInputDirPathFrom(final CommandLine commandLine) throws ParseException

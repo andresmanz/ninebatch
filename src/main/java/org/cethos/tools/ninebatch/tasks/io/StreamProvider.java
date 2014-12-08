@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.conversion.io;
+package org.cethos.tools.ninebatch.tasks.io;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

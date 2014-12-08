@@ -1,7 +1,7 @@
-package org.cethos.tools.ninebatch.conversion.batch;
+package org.cethos.tools.ninebatch.tasks.batch;
 
-import org.cethos.tools.ninebatch.conversion.io.StreamConversionIO;
-import org.cethos.tools.ninebatch.conversion.io.StreamProvider;
+import org.cethos.tools.ninebatch.tasks.io.StreamConversionIO;
+import org.cethos.tools.ninebatch.tasks.io.StreamProvider;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 import org.cethos.tools.ninebatch.creation.NinePatchCreation;
 import org.slf4j.Logger;

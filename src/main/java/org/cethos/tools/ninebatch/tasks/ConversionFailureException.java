@@ -1,4 +1,4 @@
-package org.cethos.tools.ninebatch.conversion;
+package org.cethos.tools.ninebatch.tasks;
 
 public class ConversionFailureException extends RuntimeException
 {

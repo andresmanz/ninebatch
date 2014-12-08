@@ -1,8 +1,8 @@
-package org.cethos.tools.ninebatch.tests.conversion.batch;
+package org.cethos.tools.ninebatch.tests.tasks.batch;
 
-import org.cethos.tools.ninebatch.conversion.batch.ConversionBatch;
+import org.cethos.tools.ninebatch.tasks.batch.ConversionBatch;
 import org.cethos.tools.ninebatch.creation.NinePatchConfig;
-import org.cethos.tools.ninebatch.tests.conversion.ResourceStreamProvider;
+import org.cethos.tools.ninebatch.tests.tasks.ResourceStreamProvider;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

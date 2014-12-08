@@ -1,6 +1,5 @@
-package org.cethos.tools.ninebatch.conversion.io;
+package org.cethos.tools.ninebatch.tasks.io;
 
-import org.cethos.tools.ninebatch.conversion.io.StreamProvider;
 import org.cethos.tools.ninebatch.util.NinePatchUtil;
 
 import java.awt.image.BufferedImage;
