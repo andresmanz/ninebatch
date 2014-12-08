@@ -9,33 +9,20 @@ public class TaskFactory
     {
         final ArgumentParser argumentParser = new ArgumentParser();
         final RunConfig runConfig = argumentParser.createConfigFrom(args);
+        final StreamProvider streamProvider = createStreamProviderFrom(runConfig);
 
         Task task;
 
         if(runConfig.isQueryRequested())
         {
-            task = createImageQueryTaskFrom(runConfig);
+            task = new ImageQueryTask(streamProvider);
         }
         else
         {
-            task = createBatchConversionTaskFrom(runConfig);
+            task = new BatchConversionTask(streamProvider);
         }
 
         return task;
-    }
-
-    private static Task createBatchConversionTaskFrom(final RunConfig runConfig)
-    {
-        final StreamProvider streamProvider = createStreamProviderFrom(runConfig);
-        final BatchConversionTask task = new BatchConversionTask(streamProvider);
-        task.setDeletingImageSourcesEnabled(runConfig.isDeletingOriginalsEnabled());
-        return task;
-    }
-
-    private static Task createImageQueryTaskFrom(final RunConfig runConfig)
-    {
-        final StreamProvider streamProvider = createStreamProviderFrom(runConfig);
-        return new ImageQueryTask(streamProvider);
     }
 
     private static StreamProvider createStreamProviderFrom(final RunConfig runConfig)

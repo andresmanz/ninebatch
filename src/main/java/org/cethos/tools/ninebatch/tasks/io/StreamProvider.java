@@ -8,5 +8,4 @@ public interface StreamProvider
 {
     public OutputStream getOutputStreamFor(final String fileName) throws FileNotFoundException;
     public InputStream getInputStreamFor(final String fileName) throws FileNotFoundException;
-    public void deleteImageSource(final String fileName);
 }

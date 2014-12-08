@@ -12,7 +12,6 @@ public class ResourceStreamProvider implements StreamProvider
     private final String basePath;
     private int totalOutputStreamAccessCount;
     private int totalInputStreamAccessCount;
-    private int totalSourceDeletionCount;
 
     public ResourceStreamProvider(final String basePath)
     {
@@ -42,12 +41,6 @@ public class ResourceStreamProvider implements StreamProvider
         }
     }
 
-    @Override
-    public void deleteImageSource(String fileName)
-    {
-        ++totalSourceDeletionCount;
-    }
-
     public int getTotalOutputStreamAccessCount()
     {
         return totalOutputStreamAccessCount;
@@ -56,10 +49,5 @@ public class ResourceStreamProvider implements StreamProvider
     public int getTotalInputStreamAccessCount()
     {
         return totalInputStreamAccessCount;
-    }
-
-    public int getTotalSourceDeletionCount()
-    {
-        return totalSourceDeletionCount;
     }
 }

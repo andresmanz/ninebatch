@@ -1,7 +1,7 @@
 package org.cethos.tools.ninebatch.tests.tasks;
 
-import org.cethos.tools.ninebatch.tasks.ConversionFailureException;
 import org.cethos.tools.ninebatch.tasks.BatchConversionTask;
+import org.cethos.tools.ninebatch.tasks.ConversionFailureException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -39,19 +39,5 @@ public class BatchConversionTaskTest
         processor.process();
         assertEquals(2, streamProvider.getTotalInputStreamAccessCount());
         assertEquals(1, streamProvider.getTotalOutputStreamAccessCount());
-        assertEquals(0, streamProvider.getTotalSourceDeletionCount());
-    }
-
-    @Test
-    public void testLoadAndProcess_withOneImageAndOriginalsDeletionEnabled()
-    {
-        final ResourceStreamProvider streamProvider = new ResourceStreamProvider("/envs/oneimage");
-        final BatchConversionTask processor = new BatchConversionTask(streamProvider);
-        processor.setDeletingImageSourcesEnabled(true);
-        processor.process();
-
-        assertEquals(2, streamProvider.getTotalInputStreamAccessCount());
-        assertEquals(1, streamProvider.getTotalOutputStreamAccessCount());
-        assertEquals(1, streamProvider.getTotalSourceDeletionCount());
     }
 }

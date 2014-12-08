@@ -1,9 +1,9 @@
 package org.cethos.tools.ninebatch.tasks;
 
 import org.apache.commons.io.IOUtils;
+import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 import org.cethos.tools.ninebatch.tasks.batch.ConversionParsing;
 import org.cethos.tools.ninebatch.tasks.io.StreamProvider;
-import org.cethos.tools.ninebatch.creation.NinePatchConfig;
 
 import java.io.IOException;
 import java.io.InputStream;

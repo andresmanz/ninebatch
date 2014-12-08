@@ -4,7 +4,6 @@ public class RunConfig
 {
     private String inputDirPath;
     private String outputDirPath;
-    private boolean isDeletingOriginalsEnabled;
     private boolean isQueryRequested;
 
     public RunConfig(final String inputDirPath, final String outputDirPath)
@@ -21,16 +20,6 @@ public class RunConfig
     public String getOutputDirPath()
     {
         return outputDirPath;
-    }
-
-    public boolean isDeletingOriginalsEnabled()
-    {
-        return isDeletingOriginalsEnabled;
-    }
-
-    public void setDeletingOriginalsEnabled(final boolean isEnabled)
-    {
-        this.isDeletingOriginalsEnabled = isEnabled;
     }
 
     public boolean isQueryRequested()

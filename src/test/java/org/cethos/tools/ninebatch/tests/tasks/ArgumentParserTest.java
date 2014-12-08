@@ -42,7 +42,6 @@ public class ArgumentParserTest
         final RunConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testinputdirectory");
-        assertFalse(config.isDeletingOriginalsEnabled());
         assertFalse(config.isQueryRequested());
     }
 
@@ -53,18 +52,6 @@ public class ArgumentParserTest
         final RunConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testoutputdirectory");
-        assertFalse(config.isDeletingOriginalsEnabled());
-        assertFalse(config.isQueryRequested());
-    }
-
-    @Test
-    public void testCreateConfigFromArguments_inputDirectoryAndDeleteOriginals()
-    {
-        final String[] args = CommandLineUtil.getArgsFrom("-d testinputdirectory");
-        final RunConfig config = argumentHandler.createConfigFrom(args);
-        assertEquals(config.getInputDirPath(), "testinputdirectory");
-        assertEquals(config.getOutputDirPath(), "testinputdirectory");
-        assertTrue(config.isDeletingOriginalsEnabled());
         assertFalse(config.isQueryRequested());
     }
 
@@ -75,7 +62,6 @@ public class ArgumentParserTest
         final RunConfig config = argumentHandler.createConfigFrom(args);
         assertEquals(config.getInputDirPath(), "testinputdirectory");
         assertEquals(config.getOutputDirPath(), "testinputdirectory");
-        assertFalse(config.isDeletingOriginalsEnabled());
         assertTrue(config.isQueryRequested());
     }
 }

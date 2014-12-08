@@ -6,7 +6,6 @@ import org.cethos.tools.ninebatch.tests.testutil.Assert;
 import org.junit.Test;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBuffer;
 import java.awt.image.DataBufferByte;
 import java.awt.image.RenderedImage;
 import java.io.IOException;

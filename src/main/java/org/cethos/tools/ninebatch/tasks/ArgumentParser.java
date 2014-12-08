@@ -12,15 +12,12 @@ public class ArgumentParser
 {
     private static final String CMD_LINE_SYNTAX = "ninebatch [OPTIONS] input-directory";
     private static final String OPT_OUTPUT_DIR = "o";
-    private static final String OPT_DELETE_ORIGINALS = "d";
     private static final String OPT_QUERY_IMAGES = "q";
 
     private static final String LONG_OPT_OUTPUT_DIR = "output-directory";
-    private static final String LONG_OPT_DELETE_ORIGINALS = "delete-originals";
     private static final String LONG_OPT_QUERY_IMAGES = "query-images";
 
     private static final String DESC_OUTPUT_DIR = "ninebatch output directory";
-    private static final String DESC_DELETE_ORIGINALS = "delete original images";
     private static final String DESC_QUERY_IMAGES = "query input image list; won't convert anything";
 
     private final Options options;
@@ -38,7 +35,6 @@ public class ArgumentParser
     {
         final Options options = new Options();
         options.addOption(createOutputDirectoryOption());
-        options.addOption(createDeleteOriginalsOption());
         options.addOption(createQueryImagesOption());
         return options;
     }
@@ -48,13 +44,6 @@ public class ArgumentParser
         final Option option = new Option(OPT_OUTPUT_DIR, DESC_OUTPUT_DIR);
         option.setArgs(1);
         option.setLongOpt(LONG_OPT_OUTPUT_DIR);
-        return option;
-    }
-
-    private static Option createDeleteOriginalsOption()
-    {
-        final Option option = new Option(OPT_DELETE_ORIGINALS, false, DESC_DELETE_ORIGINALS);
-        option.setLongOpt(LONG_OPT_DELETE_ORIGINALS);
         return option;
     }
 
@@ -84,11 +73,9 @@ public class ArgumentParser
 
         final String inputDirPath = getInputDirPathFrom(commandLine);
         final String outputDirPath = commandLine.getOptionValue(OPT_OUTPUT_DIR, inputDirPath);
-        final boolean isDeletingOriginalsEnabled = commandLine.hasOption(OPT_DELETE_ORIGINALS);
         final boolean isQueryRequested = commandLine.hasOption(OPT_QUERY_IMAGES);
 
         final RunConfig runConfig = new RunConfig(inputDirPath, outputDirPath);
-        runConfig.setDeletingOriginalsEnabled(isDeletingOriginalsEnabled);
         runConfig.setQueryRequested(isQueryRequested);
         return runConfig;
     }

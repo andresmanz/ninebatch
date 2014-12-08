@@ -1,7 +1,7 @@
 package org.cethos.tools.ninebatch.tests.tasks;
 
-import org.cethos.tools.ninebatch.tasks.ConversionFailureException;
 import org.cethos.tools.ninebatch.tasks.BatchConversionTask;
+import org.cethos.tools.ninebatch.tasks.ConversionFailureException;
 import org.cethos.tools.ninebatch.tasks.ImageQueryTask;
 import org.cethos.tools.ninebatch.tasks.Task;
 import org.cethos.tools.ninebatch.tasks.TaskFactory;
@@ -59,7 +59,7 @@ public class TaskFactoryTest
     @Test
     public void testCreateFrom_imageQueryAndBatchProcessorArgs() throws Exception
     {
-        final String[] args = CommandLineUtil.getArgsFrom("-q -d -o test testdirectory");
+        final String[] args = CommandLineUtil.getArgsFrom("-q -o test testdirectory");
         final Task processor = taskFactory.createFrom(args);
         assertTrue(processor instanceof ImageQueryTask);
     }
